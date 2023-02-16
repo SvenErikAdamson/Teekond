@@ -12,22 +12,27 @@ class_name Island
 @onready var node_manager = get_node("/root/Game/Level")
 @onready var sprite: Sprite2D = $Sprite2D
 
+var show_encounter = null
 var in_progress = false
 var encounter_in_progress = false
 var is_scouted = false
 
 func _ready():
+	if encounter_type != null:
+		show_encounter = encounter_type.instantiate()
+		show_encounter.position.y = -100
+		add_child(show_encounter)
+		show_encounter.hide()
+		
 	if current_island:
 		scouted = true
 		node_manager.current_island = self
 		
 func _process(_delta):
+	if scouted and is_instance_valid(show_encounter):
+		show_encounter.show()
 	if current_island and !encounter_in_progress:
 		check_encounter()
-	if current_island:
-		$Current.show()
-	else:
-		$Current.hide()
 	if scouted:
 		sprite.modulate = Color(1,1,1)
 	else:
@@ -42,10 +47,11 @@ func _on_input_event(_viewport, event, _shape_idx):
 		node_manager.scout(self)
 
 func check_encounter():
-	if current_island and encounter_instance != null:
+	if current_island and encounter_instance != null and is_instance_valid(show_encounter):
+		show_encounter.queue_free()
 		in_progress = true
 		var encounter = encounter_instance.instantiate()
-		encounter.position.y = -400
-		encounter.encounter = encounter_type
+		encounter.position.y = -60
+		encounter.encounter_scene = encounter_type
 		add_child(encounter)
 		encounter_in_progress = true

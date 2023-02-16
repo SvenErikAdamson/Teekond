@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bhpk12v6wyq8m" path="res://scenes/island/connection.tscn" id="2_rdx8w"]
 [ext_resource type="PackedScene" uid="uid://x4fpiw1u1bd6" path="res://scenes/encounters/encounter.tscn" id="4_khctx"]
 [ext_resource type="Script" path="res://scenes/ui/ui_manager.gd" id="4_ytuiy"]
-[ext_resource type="PackedScene" uid="uid://bt5nqb048ytv" path="res://scenes/encounters/data/skep.tscn" id="5_ofnep"]
+[ext_resource type="PackedScene" uid="uid://dig1kiob30hq0" path="res://scenes/encounters/data/dollmer.tscn" id="5_4ebec"]
 
 [node name="Game" type="Node2D"]
 
@@ -26,15 +26,15 @@ current_island = true
 food = 20.0
 
 [node name="Island2" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
-position = Vector2(1739, 394)
+position = Vector2(968, 168)
 encounter_instance = ExtResource("4_khctx")
-encounter_type = ExtResource("5_ofnep")
+encounter_type = ExtResource("5_4ebec")
 
 [node name="Island3" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
-position = Vector2(-306, 1012)
+position = Vector2(104, 576)
 
 [node name="Island4" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
-position = Vector2(1300, 1564)
+position = Vector2(1104, 832)
 
 [node name="Connections" type="Node2D" parent="Level"]
 

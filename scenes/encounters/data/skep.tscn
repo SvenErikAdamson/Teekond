@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bt5nqb048ytv"]
+[gd_scene load_steps=3 format=3 uid="uid://bt5nqb048ytv"]
 
 [ext_resource type="Script" path="res://scenes/encounters/data/skep.gd" id="1_y5loo"]
+[ext_resource type="Texture2D" uid="uid://dw2fj725ba7vh" path="res://assets/big-creatur.png" id="2_gedgr"]
 
 [node name="Skep" type="Node2D"]
 script = ExtResource("1_y5loo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gedgr")
