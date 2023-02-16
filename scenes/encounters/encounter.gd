@@ -8,6 +8,8 @@ var encounter_hp: int
 
 @onready var node_manager = get_node("/root/Game/Level")
 @onready var player_animation = $Player/AnimationPlayer
+@onready var damage_label = load("res://scenes/encounters/ui/damage_label.tscn")
+
 var player_timer := 0.0
 var player_rate := 1
 var encounter_timer := 0.0
@@ -20,7 +22,8 @@ func _ready():
 	encounter.position = $EncounterMarker.position
 	add_child(encounter)
 	player_hp = node_manager.pop * 100
-	encounter_hp = 10
+	if encounter != null:
+		encounter_hp = encounter.health
 
 func _process(delta: float):
 	if turn:
@@ -29,7 +32,7 @@ func _process(delta: float):
 		encounter_timer += delta
 		
 	if player_timer >= player_rate and turn:
-		player_animation.speed_scale = 0.8
+		player_animation.speed_scale = 0.9
 		player_animation.play("Attack")
 		
 	elif encounter_timer >= encounter_rate and !turn:
@@ -58,9 +61,17 @@ func encounter_attack():
 	encounter.animation_player.play("Idle")
 	
 func encounter_damage(damage):
-	print("Encounter did: " + str(damage) + " Damage")
+	damage_txt_anim($Player.global_position,damage, $Player)
 	player_hp -= damage
 
 func player_damage(damage):
-	print("Player did: " + str(damage) + " Damage")
+	damage_txt_anim($EncounterMarker.global_position,damage, encounter)
 	encounter_hp -= damage
+
+func damage_txt_anim(pos, amount, owner):
+	var dmg_label = damage_label.instantiate()
+	owner.add_child(dmg_label)
+	dmg_label.global_position = pos
+
+	dmg_label.text = str(int(amount))
+	
