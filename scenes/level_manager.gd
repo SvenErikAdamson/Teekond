@@ -23,5 +23,6 @@ func scout(node):
 		pop -= 1
 		node.is_scouted = true
 		await get_tree().create_timer(2).timeout
+		pop += 1
 		node.scouted = true
 		node.is_scouted = false

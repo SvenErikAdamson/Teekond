@@ -1,13 +1,13 @@
 extends StaticBody2D
 class_name Island
 
-@export var encounter_instance: PackedScene = null
 @export var encounter_type: PackedScene = null
 @export var current_island: bool = false
 @export var scouted: bool = false
 @export var food: float = 300
 @export var water: int = 100
 
+@onready var encounter_scene = preload("res://scenes/encounters/encounter.tscn")
 @onready var connector_scene = preload("res://scenes/utility/connector.tscn")
 @onready var node_manager = get_node("/root/Game/Level")
 @onready var sprite: Sprite2D = $Sprite2D
@@ -20,7 +20,7 @@ var is_scouted = false
 func _ready():
 	if encounter_type != null:
 		show_encounter = encounter_type.instantiate()
-		show_encounter.position.y = -100
+		show_encounter.position.y = -60
 		add_child(show_encounter)
 		show_encounter.hide()
 		
@@ -47,10 +47,10 @@ func _on_input_event(_viewport, event, _shape_idx):
 		node_manager.scout(self)
 
 func check_encounter():
-	if current_island and encounter_instance != null and is_instance_valid(show_encounter):
+	if current_island and encounter_type != null and is_instance_valid(show_encounter):
 		show_encounter.queue_free()
 		in_progress = true
-		var encounter = encounter_instance.instantiate()
+		var encounter = encounter_scene.instantiate()
 		encounter.position.y = -60
 		encounter.encounter_scene = encounter_type
 		add_child(encounter)

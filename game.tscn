@@ -1,12 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6byyvp5ypjmq"]
+[gd_scene load_steps=12 format=3 uid="uid://c6byyvp5ypjmq"]
 
 [ext_resource type="PackedScene" uid="uid://wg1gs70n7nbo" path="res://scenes/island/island.tscn" id="1_i6ghg"]
 [ext_resource type="Script" path="res://scenes/level_manager.gd" id="1_om1mu"]
 [ext_resource type="Script" path="res://scenes/utility/camera_controller.gd" id="2_jfjvg"]
 [ext_resource type="PackedScene" uid="uid://bhpk12v6wyq8m" path="res://scenes/island/connection.tscn" id="2_rdx8w"]
-[ext_resource type="PackedScene" uid="uid://x4fpiw1u1bd6" path="res://scenes/encounters/encounter.tscn" id="4_khctx"]
 [ext_resource type="Script" path="res://scenes/ui/ui_manager.gd" id="4_ytuiy"]
 [ext_resource type="PackedScene" uid="uid://dig1kiob30hq0" path="res://scenes/encounters/data/dollmer.tscn" id="5_4ebec"]
+[ext_resource type="Texture2D" uid="uid://dskrd11sqbt24" path="res://assets/sprites/icons/pop.png" id="8_5phof"]
+[ext_resource type="FontFile" uid="uid://1yl0tcwtd4ql" path="res://assets/m5x7.ttf" id="9_sgapp"]
+[ext_resource type="Texture2D" uid="uid://bgsghea166yr6" path="res://assets/sprites/icons/food.png" id="10_ufr34"]
+[ext_resource type="Texture2D" uid="uid://do5uhcm6d6leq" path="res://assets/sprites/icons/water.png" id="11_6qias"]
+[ext_resource type="PackedScene" uid="uid://chdbxmmfcthwa" path="res://scenes/ui/menu/main_menu.tscn" id="11_7cetr"]
 
 [node name="Game" type="Node2D"]
 
@@ -14,7 +18,6 @@
 script = ExtResource("1_om1mu")
 
 [node name="Camera2D" type="Camera2D" parent="Level"]
-zoom = Vector2(0.4, 0.4)
 position_smoothing_enabled = true
 script = ExtResource("2_jfjvg")
 
@@ -26,32 +29,40 @@ current_island = true
 food = 20.0
 
 [node name="Island2" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
-position = Vector2(968, 168)
-encounter_instance = ExtResource("4_khctx")
+position = Vector2(648, 80)
 encounter_type = ExtResource("5_4ebec")
 
 [node name="Island3" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
-position = Vector2(104, 576)
+position = Vector2(352, 360)
+encounter_type = ExtResource("5_4ebec")
 
 [node name="Island4" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
-position = Vector2(1104, 832)
+position = Vector2(1120, 392)
+
+[node name="Island5" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(696, -232)
 
 [node name="Connections" type="Node2D" parent="Level"]
 
 [node name="Connection" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
-position = Vector2(1071, 161)
+position = Vector2(448, 16)
 node1 = NodePath("../../Islands/Island")
 node2 = NodePath("../../Islands/Island2")
 
 [node name="Connection2" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
-position = Vector2(-136, 360)
+position = Vector2(488, 272)
 node1 = NodePath("../../Islands/Island3")
 node2 = NodePath("../../Islands/Island2")
 
 [node name="Connection3" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
-position = Vector2(500, 1343)
+position = Vector2(752, 416)
 node1 = NodePath("../../Islands/Island3")
 node2 = NodePath("../../Islands/Island4")
+
+[node name="Connection4" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(424, -184)
+node1 = NodePath("../../Islands/Island")
+node2 = NodePath("../../Islands/Island5")
 
 [node name="Editor" type="Node2D" parent="."]
 
@@ -80,17 +91,31 @@ layout_mode = 2
 [node name="Icons" type="HBoxContainer" parent="UI/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Amount" type="HBoxContainer" parent="UI/Control/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="UI/Control/MarginContainer/VBoxContainer/Icons"]
 layout_mode = 2
+texture = ExtResource("8_5phof")
 
-[node name="PopLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/Amount"]
+[node name="PopLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/Icons"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("9_sgapp")
 text = "5"
 
-[node name="FoodLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/Amount"]
+[node name="TextureRect2" type="TextureRect" parent="UI/Control/MarginContainer/VBoxContainer/Icons"]
 layout_mode = 2
+texture = ExtResource("10_ufr34")
+
+[node name="FoodLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/Icons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_sgapp")
 text = "20"
 
-[node name="WaterLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/Amount"]
+[node name="TextureRect3" type="TextureRect" parent="UI/Control/MarginContainer/VBoxContainer/Icons"]
 layout_mode = 2
+texture = ExtResource("11_6qias")
+
+[node name="WaterLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/Icons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_sgapp")
 text = "30"
+
+[node name="MainMenu" parent="UI" instance=ExtResource("11_7cetr")]

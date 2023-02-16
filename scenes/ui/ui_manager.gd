@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-@onready var pop_label = $Control/MarginContainer/VBoxContainer/Amount/FoodLabel
-@onready var food_label =$Control/MarginContainer/VBoxContainer/Amount/FoodLabel
-@onready var water_label = $Control/MarginContainer/VBoxContainer/Amount/WaterLabel
+@onready var pop_label = $Control/MarginContainer/VBoxContainer/Icons/PopLabel
+@onready var food_label = $Control/MarginContainer/VBoxContainer/Icons/FoodLabel
+@onready var water_label = $Control/MarginContainer/VBoxContainer/Icons/WaterLabel
 @onready var node_manager = get_node("/root/Game/Level")
 
 func _process(_delta):
