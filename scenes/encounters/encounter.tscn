@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://x4fpiw1u1bd6"]
+
+[ext_resource type="Script" path="res://scenes/encounters/encounter.gd" id="1_gflko"]
+[ext_resource type="Texture2D" uid="uid://dw2fj725ba7vh" path="res://assets/big-creatur.png" id="1_yttcx"]
+
+[node name="encounter" type="Node2D"]
+script = ExtResource("1_gflko")
+
+[node name="Enemy" type="Sprite2D" parent="."]
+position = Vector2(176, 0)
+texture = ExtResource("1_yttcx")
+
+[node name="Player" type="Sprite2D" parent="."]
+position = Vector2(-176, 0)
+texture = ExtResource("1_yttcx")
+flip_h = true

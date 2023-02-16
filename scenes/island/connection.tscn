@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhpk12v6wyq8m"]
+
+[ext_resource type="Texture2D" uid="uid://dvrmntqdrw61v" path="res://assets/dotted_line.png" id="1_7qydp"]
+[ext_resource type="Script" path="res://scenes/island/connection.gd" id="1_pvqgr"]
+[ext_resource type="Texture2D" uid="uid://r62s0vm6tq5b" path="res://assets/current.svg" id="3_66u1i"]
+
+[node name="Connection" type="Line2D"]
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 0)
+width = 15.0
+texture = ExtResource("1_7qydp")
+texture_mode = 1
+script = ExtResource("1_pvqgr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_66u1i")

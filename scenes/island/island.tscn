@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://wg1gs70n7nbo"]
+
+[ext_resource type="Script" path="res://scenes/island/island.gd" id="1_ilmvi"]
+[ext_resource type="Texture2D" uid="uid://c0f1mk8n07v4y" path="res://assets/island.svg" id="2_xmiri"]
+[ext_resource type="Texture2D" uid="uid://r62s0vm6tq5b" path="res://assets/current.svg" id="3_msqiq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_heug2"]
+radius = 216.0
+
+[sub_resource type="Animation" id="Animation_omlek"]
+resource_name = "Hover"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -200), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_iwbsn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ybcko"]
+_data = {
+"Hover": SubResource("Animation_omlek"),
+"RESET": SubResource("Animation_iwbsn")
+}
+
+[node name="Island" type="StaticBody2D"]
+z_index = 2
+input_pickable = true
+script = ExtResource("1_ilmvi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xmiri")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_heug2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+speed_scale = 0.5
+libraries = {
+"": SubResource("AnimationLibrary_ybcko")
+}
+
+[node name="Current" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -496)
+texture = ExtResource("3_msqiq")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

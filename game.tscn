@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6byyvp5ypjmq"]
+
+[ext_resource type="PackedScene" uid="uid://wg1gs70n7nbo" path="res://scenes/island/island.tscn" id="1_i6ghg"]
+[ext_resource type="Script" path="res://scenes/level_manager.gd" id="1_om1mu"]
+[ext_resource type="Script" path="res://scenes/utility/camera_controller.gd" id="2_jfjvg"]
+[ext_resource type="PackedScene" uid="uid://bhpk12v6wyq8m" path="res://scenes/island/connection.tscn" id="2_rdx8w"]
+[ext_resource type="PackedScene" uid="uid://x4fpiw1u1bd6" path="res://scenes/encounters/encounter.tscn" id="4_khctx"]
+[ext_resource type="Script" path="res://scenes/ui/ui_manager.gd" id="4_ytuiy"]
+[ext_resource type="PackedScene" uid="uid://bt5nqb048ytv" path="res://scenes/encounters/data/skep.tscn" id="5_ofnep"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Level" type="Node2D" parent="."]
+script = ExtResource("1_om1mu")
+
+[node name="Camera2D" type="Camera2D" parent="Level"]
+zoom = Vector2(0.4, 0.4)
+position_smoothing_enabled = true
+script = ExtResource("2_jfjvg")
+
+[node name="Islands" type="Node2D" parent="Level"]
+
+[node name="Island" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(259, -61)
+current_island = true
+food = 20.0
+
+[node name="Island2" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(1739, 394)
+encounter_instance = ExtResource("4_khctx")
+encounter_type = ExtResource("5_ofnep")
+
+[node name="Island3" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(-306, 1012)
+
+[node name="Island4" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(1300, 1564)
+
+[node name="Connections" type="Node2D" parent="Level"]
+
+[node name="Connection" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(1071, 161)
+node1 = NodePath("../../Islands/Island")
+node2 = NodePath("../../Islands/Island2")
+
+[node name="Connection2" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(-136, 360)
+node1 = NodePath("../../Islands/Island3")
+node2 = NodePath("../../Islands/Island2")
+
+[node name="Connection3" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(500, 1343)
+node1 = NodePath("../../Islands/Island3")
+node2 = NodePath("../../Islands/Island4")
+
+[node name="Editor" type="Node2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("4_ytuiy")
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+theme_override_constants/margin_left = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/MarginContainer"]
+layout_mode = 2
+
+[node name="Icons" type="HBoxContainer" parent="UI/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Amount" type="HBoxContainer" parent="UI/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PopLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/Amount"]
+layout_mode = 2
+text = "5"
+
+[node name="FoodLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/Amount"]
+layout_mode = 2
+text = "20"
+
+[node name="WaterLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/Amount"]
+layout_mode = 2
+text = "30"

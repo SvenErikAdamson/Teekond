@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3vtl0rgckw7y"]
+
+[ext_resource type="Script" path="res://scenes/utility/connector.gd" id="1_lw1g3"]
+[ext_resource type="Texture2D" uid="uid://canu7fuyeqlt1" path="res://assets/icon.svg" id="2_7ag4e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbs13"]
+size = Vector2(26, 27)
+
+[node name="Connector" type="Line2D"]
+z_index = 2
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(0.721569, 0.976471, 0, 1)
+script = ExtResource("1_lw1g3")
+
+[node name="Hand" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Hand"]
+modulate = Color(1, 0, 1, 1)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_7ag4e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_fbs13")
+
+[connection signal="body_entered" from="Hand" to="." method="_on_hand_body_entered"]
+[connection signal="body_exited" from="Hand" to="." method="_on_hand_body_exited"]
