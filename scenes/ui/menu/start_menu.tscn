@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://chdbxmmfcthwa"]
+[gd_scene load_steps=2 format=3 uid="uid://bpnpy4tc088lf"]
 
-[ext_resource type="Script" path="res://scenes/ui/menu/main_menu.gd" id="1_84707"]
+[ext_resource type="Script" path="res://scenes/ui/menu/start_menu.gd" id="1_u6v20"]
 
-[node name="MainMenu" type="Control"]
+[node name="StartMenu" type="Control"]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_84707")
+script = ExtResource("1_u6v20")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -26,9 +26,13 @@ offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Continue" type="Button" parent="Menu"]
+[node name="Start" type="Button" parent="Menu"]
 layout_mode = 2
-text = "Continue"
+text = "Start"
+
+[node name="Editor" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Editor"
 
 [node name="Options" type="Button" parent="Menu"]
 layout_mode = 2
@@ -227,7 +231,8 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Back"
 
-[connection signal="pressed" from="Menu/Continue" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Menu/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Menu/Editor" to="." method="_on_editor_pressed"]
 [connection signal="pressed" from="Menu/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Menu/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Options/VBoxContainer/Video" to="." method="_on_video_pressed"]

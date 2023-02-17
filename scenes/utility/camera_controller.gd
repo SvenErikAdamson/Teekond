@@ -1,7 +1,7 @@
 extends Camera2D
 
 var speed = 50
-var zoom_percentage = 15
+var zoom_percentage = 10
 var max_zoom = 1.5
 var max_unzoom = 0.4
 

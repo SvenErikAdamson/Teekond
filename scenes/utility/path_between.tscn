@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://obrvqt7qgenr"]
 
 [ext_resource type="Script" path="res://scenes/utility/path_between.gd" id="1_n0l2u"]
-[ext_resource type="Texture2D" uid="uid://canu7fuyeqlt1" path="res://assets/icon.svg" id="2_lwkh0"]
+[ext_resource type="Texture2D" uid="uid://dskrd11sqbt24" path="res://assets/sprites/icons/pop.png" id="2_c8h35"]
 
 [sub_resource type="Curve2D" id="Curve2D_2l5d2"]
 
@@ -15,6 +15,4 @@ rotates = false
 loop = false
 
 [node name="Sprite2D" type="Sprite2D" parent="PathFollow2D"]
-modulate = Color(0, 0.764706, 0.784314, 1)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_lwkh0")
+texture = ExtResource("2_c8h35")

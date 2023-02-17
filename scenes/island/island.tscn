@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://wg1gs70n7nbo"]
+[gd_scene load_steps=8 format=3 uid="uid://wg1gs70n7nbo"]
 
 [ext_resource type="Script" path="res://scenes/island/island.gd" id="1_ilmvi"]
-[ext_resource type="Texture2D" uid="uid://bbfeqsurqc1ny" path="res://assets/Islands-Sheet.png" id="2_cblks"]
+[ext_resource type="Texture2D" uid="uid://ce5t31q31kv8a" path="res://assets/sprites/islands/standard-Sheet.png" id="2_lcv0q"]
+[ext_resource type="PackedScene" uid="uid://b7rwxbogcdtmc" path="res://scenes/island/indicators/camp.tscn" id="3_totjb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_heug2"]
 radius = 216.0
@@ -50,8 +51,8 @@ input_pickable = true
 script = ExtResource("1_ilmvi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_cblks")
-hframes = 2
+texture = ExtResource("2_lcv0q")
+hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_heug2")
@@ -61,5 +62,9 @@ speed_scale = 0.5
 libraries = {
 "": SubResource("AnimationLibrary_ybcko")
 }
+
+[node name="Camp" parent="." instance=ExtResource("3_totjb")]
+visible = false
+position = Vector2(0, -8)
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

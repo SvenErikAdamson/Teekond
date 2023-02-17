@@ -5,17 +5,12 @@ extends Control
 @onready var video = $Video
 @onready var audio = $Audio
 
-func _process(_delta):
-	if Input.is_action_just_pressed("ui_cancel"):
-		toggle()
-
-func toggle():
-	visible = !visible
-	get_tree().paused = visible
-
 func _on_start_pressed():
-	toggle()
+	get_tree().change_scene_to_file("res://game.tscn")
 
+func _on_editor_pressed():
+	get_tree().change_scene_to_file("res://scenes/editor/editor.tscn")
+	
 func _on_options_pressed():
 	show_and_hide(options, menu)
 	
@@ -63,5 +58,3 @@ func _on_sound_fx_value_changed(value):
 func _on_back_from_audio_pressed():
 	show_and_hide(options, audio)
 
-func _on_editor_pressed():
-	pass # Replace with function body.

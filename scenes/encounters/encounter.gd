@@ -40,7 +40,7 @@ func combat(delta):
 	elif !turn:
 		encounter_timer += delta
 	if player_timer >= player_rate and turn:
-		player_animation.speed_scale = 0.9
+		player_animation.speed_scale = 1.0
 		player_animation.play("Attack")
 	elif encounter_timer >= encounter_rate and !turn:
 		encounter.animation_player.speed_scale = 0.8
@@ -52,6 +52,7 @@ func combat(delta):
 		
 func player_attack():
 	encounter.animation_player.play("Damage")
+	node_manager.exhaustion += 0.5
 	player_damage(randf_range(0,node_manager.pop))
 	turn = false
 	encounter_timer = 0.0
