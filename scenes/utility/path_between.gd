@@ -7,8 +7,10 @@ var to: Node
 @onready var node_manager = get_node("/root/Game/Level")
 @onready var pathfollow = $PathFollow2D
 
+func _ready():
+	node_manager.player_is_moving = true
+	
 func _physics_process(delta):
-	speed = 1.0 -  node_manager.exhaustion * 0.1
 	pathfollow.progress_ratio += delta * speed
 	if pathfollow.progress_ratio >= 1:
 		from.current_island = false
@@ -17,4 +19,6 @@ func _physics_process(delta):
 		from.in_progress = false
 		to.in_progress = false
 		to.scouted = true
+		node_manager.player_is_moving = false
+		node_manager.exhaustion += from.harshness
 		queue_free()

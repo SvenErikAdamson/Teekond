@@ -13,7 +13,7 @@ func _ready():
 	
 func _process(_delta):
 	set_positions()
-	if Input.is_action_just_released("mb_left") and focused_island != null:
+	if Input.is_action_just_released("mb_left") and focused_island != null and node_manager.exhaustion <= 90:
 		print("Can travel to node: " + str(node_manager.check_destination(from,focused_island)))
 		if node_manager.check_destination(from,focused_island):
 			create_path()

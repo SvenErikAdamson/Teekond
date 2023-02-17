@@ -3,17 +3,23 @@ extends Node2D
 var node_list: Dictionary
 var current_island: Node
 
-var food: float = 25
+@export var rest_modifier: float = 1.0
+@export var winter_modifier: float = 2.0
+@export var food: float = 25
 var water: int = 20
 var pop: int = 5
-var exhaustion: float = 3.8 
-var max_exhaustion: float = 100.0
-var speed_modifier: float = 1.0
+var exhaustion: float = 0.0
+
+var player_in_combat: bool = false
+var player_is_moving: bool = false
+var player_in_winter: bool = false
 
 @onready var scouting_indicator_scene = load("res://scenes/island/indicators/scouting_indicator.tscn")
 
 func _process(delta):
+	exhaustion_check()
 	use_rations(delta)
+	rest(delta)
 	
 func add_connection(node, con):
 	if !node_list.has(node):
@@ -40,4 +46,20 @@ func scout(node):
 		scouting_indicator.free()
 
 func use_rations(delta):
-	food -= delta
+	if player_in_winter:
+		food -= delta * winter_modifier
+	else:
+		food -= delta
+
+func rest(delta):
+	if !player_in_combat and !player_is_moving and exhaustion > 0:
+		exhaustion -= delta * rest_modifier
+
+func exhaustion_check():
+	if exhaustion >= 100:
+		exhaustion = 100
+	elif exhaustion < 0:
+		exhaustion = 0
+		
+func food_check():
+	pass

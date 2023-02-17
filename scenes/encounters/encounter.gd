@@ -7,7 +7,6 @@ var player_hp: int
 var lost_hp: int
 var encounter_hp: int
 
-
 @onready var node_manager = get_node("/root/Game/Level")
 @onready var player_animation = $Player/AnimationPlayer
 @onready var damage_label = load("res://scenes/encounters/ui/damage_label.tscn")
@@ -19,6 +18,7 @@ var encounter_rate := 1
 var turn: bool = true
 
 func _ready():
+	node_manager.player_in_combat = true
 	player_animation.play("Idle")
 	player_hp = node_manager.pop * 100
 	create_encounter()
@@ -40,7 +40,7 @@ func combat(delta):
 	elif !turn:
 		encounter_timer += delta
 	if player_timer >= player_rate and turn:
-		player_animation.speed_scale = 1.0
+		player_animation.speed_scale = 1.5
 		player_animation.play("Attack")
 	elif encounter_timer >= encounter_rate and !turn:
 		encounter.animation_player.speed_scale = 0.8
@@ -48,6 +48,7 @@ func combat(delta):
 	if encounter_hp <= 0:
 		get_parent().encounter_type = null
 		get_parent().in_progress = false
+		node_manager.player_in_combat = false
 		queue_free()
 		
 func player_attack():

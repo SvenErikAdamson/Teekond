@@ -11,6 +11,10 @@ z_index = 2
 points = PackedVector2Array(0, 0, 0, 0)
 width = 3.0
 default_color = Color(0.721569, 0.976471, 0, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+sharp_limit = 4.0
+round_precision = 12
 script = ExtResource("1_lw1g3")
 
 [node name="Hand" type="Area2D" parent="."]

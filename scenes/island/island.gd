@@ -6,6 +6,9 @@ class_name Island
 @export var scouted: bool = false
 @export var food: float = 300.0
 @export var water: int = 100
+@export var harshness: float = 2.0
+
+var max_food: float
 
 @onready var encounter_scene = preload("res://scenes/encounters/encounter.tscn")
 @onready var connector_scene = preload("res://scenes/utility/connector.tscn")
@@ -19,7 +22,7 @@ var encounter_in_progress: bool = false
 var is_scouted: bool = false
 var is_combat_on: bool = false
 
-var max_food: float
+
 
 func _ready():
 	create_encounter()
@@ -27,6 +30,8 @@ func _ready():
 	if current_island:
 		scouted = true
 		node_manager.current_island = self
+	await get_tree().create_timer(randf_range(0,3)).timeout
+	$AnimationPlayer.play("Hover")
 		
 func _process(delta):
 	food_state()

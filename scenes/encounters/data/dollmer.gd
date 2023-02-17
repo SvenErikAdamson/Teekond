@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-var health: float = 30
+var health: float = 5
 var min_dmg: int  = 0
 var max_dmg: int = 5
 
