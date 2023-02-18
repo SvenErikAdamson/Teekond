@@ -40,10 +40,12 @@ func create_path():
 	
 func _on_hand_body_entered(body):
 	if body is Island and body != from:
+		body.hover_indicator.show()
 		can_move = true
 		focused_island = body
 		
 func _on_hand_body_exited(body):
 	if body is Island and body != from:
+		body.hover_indicator.hide()
 		can_move = false
 		focused_island = null

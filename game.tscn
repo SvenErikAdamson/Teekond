@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6byyvp5ypjmq"]
+[gd_scene load_steps=14 format=3 uid="uid://c6byyvp5ypjmq"]
 
 [ext_resource type="PackedScene" uid="uid://wg1gs70n7nbo" path="res://scenes/island/island.tscn" id="1_i6ghg"]
 [ext_resource type="Script" path="res://scenes/level_manager.gd" id="1_om1mu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scenes/ui/ui_manager.gd" id="4_ytuiy"]
 [ext_resource type="PackedScene" uid="uid://dig1kiob30hq0" path="res://scenes/encounters/data/dollmer.tscn" id="5_4ebec"]
 [ext_resource type="PackedScene" uid="uid://djshw8qfx25nl" path="res://scenes/editor/winter.tscn" id="6_o3er2"]
+[ext_resource type="AudioStream" uid="uid://c5l1wqp6yfs1r" path="res://assets/sound/ingame_song.mp3" id="7_tw2vb"]
 [ext_resource type="Texture2D" uid="uid://dskrd11sqbt24" path="res://assets/sprites/icons/pop.png" id="8_5phof"]
 [ext_resource type="FontFile" uid="uid://1yl0tcwtd4ql" path="res://assets/m5x7.ttf" id="9_sgapp"]
 [ext_resource type="Texture2D" uid="uid://bgsghea166yr6" path="res://assets/sprites/icons/food.png" id="10_ufr34"]
@@ -31,19 +32,21 @@ food = 10.0
 water = 10
 
 [node name="Island2" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
-position = Vector2(648, 80)
+position = Vector2(512, 64)
 encounter_type = ExtResource("5_4ebec")
 
 [node name="Island3" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
-position = Vector2(352, 360)
+position = Vector2(467, 247)
 encounter_type = ExtResource("5_4ebec")
 
 [node name="Island4" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(1120, 392)
 
 [node name="Island5" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
-position = Vector2(696, -232)
+position = Vector2(561, -155)
+scouted = true
 food = 0.0
+key = "from5to6"
 
 [node name="Island6" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(1104, -64)
@@ -71,6 +74,14 @@ food = 0.0
 
 [node name="Island12" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(2312, -156)
+food = 0.0
+
+[node name="Island13" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(2753, -158)
+food = 0.0
+
+[node name="Island14" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(2971, -304)
 food = 0.0
 
 [node name="Connections" type="Node2D" parent="Level"]
@@ -145,7 +156,23 @@ position = Vector2(896, 0)
 node1 = NodePath("../../Islands/Island6")
 node2 = NodePath("../../Islands/Island2")
 
+[node name="Connection15" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(2551, -163)
+node1 = NodePath("../../Islands/Island12")
+node2 = NodePath("../../Islands/Island13")
+
+[node name="Connection16" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(3046, -159)
+node1 = NodePath("../../Islands/Island13")
+node2 = NodePath("../../Islands/Island14")
+
 [node name="Winter" parent="Level" instance=ExtResource("6_o3er2")]
+
+[node name="Node" type="Node" parent="Level"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Level/Node"]
+stream = ExtResource("7_tw2vb")
+autoplay = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("4_ytuiy")

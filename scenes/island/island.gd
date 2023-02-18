@@ -1,6 +1,7 @@
 extends StaticBody2D
 class_name Island
 
+@export_category("Island Data")
 @export var encounter_type: PackedScene = null
 @export var current_island: bool = false
 @export var scouted: bool = false
@@ -8,21 +9,27 @@ class_name Island
 @export var water: int = 100
 @export var harshness: float = 2.0
 
-var max_food: float
+@export_category("Additional")
+@export var key_needed: String
+@export var connnection_opened: Node 
+
+@export_category("On Island")
+@export var item: Resource = null
+@export var key: String
 
 @onready var encounter_scene = preload("res://scenes/encounters/encounter.tscn")
 @onready var connector_scene = preload("res://scenes/utility/connector.tscn")
 @onready var node_manager = get_node("/root/Game/Level")
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var camp: Node2D = $Camp
+@onready var hover_indicator = $HoverIndicator
 
+var max_food: float
 var show_encounter = null
 var in_progress: bool = false
 var encounter_in_progress: bool = false
 var is_scouted: bool = false
 var is_combat_on: bool = false
-
-
 
 func _ready():
 	create_encounter()
@@ -30,14 +37,15 @@ func _ready():
 	if current_island:
 		scouted = true
 		node_manager.current_island = self
-	await get_tree().create_timer(randf_range(0,3)).timeout
-	$AnimationPlayer.play("Hover")
+#	await get_tree().create_timer(randf_range(0,3)).timeout
+#	$AnimationPlayer.play("Hover")
 		
 func _process(delta):
 	food_state()
 	forage(delta)
 	if current_island:
 		camp.show()
+		node_manager.add_key(key)
 	else:
 		camp.hide()
 	if scouted and is_instance_valid(show_encounter):
@@ -47,7 +55,7 @@ func _process(delta):
 	if scouted:
 		sprite.modulate = Color(1,1,1)
 	else:
-		sprite.modulate = Color(1,0,1)
+		sprite.modulate = Color(0,0,0)
 		
 func food_state():
 	if calc_percentage(food, max_food) >= 90.0:
@@ -61,7 +69,7 @@ func food_state():
 		
 func forage(delta):
 	if current_island and food >= 0:
-		food -= delta
+		food -= delta * node_manager.forage_modifier
 		node_manager.food += delta
 		
 func _on_input_event(_viewport, event, _shape_idx):

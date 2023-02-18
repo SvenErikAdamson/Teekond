@@ -2,13 +2,19 @@ extends Node2D
 
 var node_list: Dictionary
 var current_island: Node
+var hovered_island: Node
+var last_island: Node 
 
+@export var forage_modifier: float = 1.0
+@export var combat_modifier: float = 1.0
 @export var rest_modifier: float = 1.0
 @export var winter_modifier: float = 2.0
 @export var food: float = 25
-var water: int = 20
-var pop: int = 5
+@export var water: int = 20
+@export var pop: int = 5
+
 var exhaustion: float = 0.0
+var key_list: Array
 
 var player_in_combat: bool = false
 var player_is_moving: bool = false
@@ -63,3 +69,13 @@ func exhaustion_check():
 		
 func food_check():
 	pass
+
+func check_key(key):
+	if key_list.has(key):
+		return true
+	else:
+		return false
+		
+func add_key(key):
+	if check_key(key):
+		key_list.append(key)
