@@ -43,7 +43,7 @@ encounter_type = ExtResource("5_4ebec")
 position = Vector2(1120, 392)
 
 [node name="Island5" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
-position = Vector2(561, -155)
+position = Vector2(582, -245)
 scouted = true
 food = 0.0
 key = "from5to6"
@@ -74,6 +74,7 @@ food = 0.0
 
 [node name="Island12" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(2312, -156)
+encounter_type = ExtResource("5_4ebec")
 food = 0.0
 
 [node name="Island13" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
@@ -167,6 +168,7 @@ node1 = NodePath("../../Islands/Island13")
 node2 = NodePath("../../Islands/Island14")
 
 [node name="Winter" parent="Level" instance=ExtResource("6_o3er2")]
+position = Vector2(-992, 0)
 
 [node name="Node" type="Node" parent="Level"]
 

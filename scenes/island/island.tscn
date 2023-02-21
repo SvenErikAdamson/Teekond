@@ -128,4 +128,6 @@ visible = false
 position = Vector2(0, -72)
 texture = ExtResource("4_wo41w")
 
+[node name="IconContainer" type="Node2D" parent="."]
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]

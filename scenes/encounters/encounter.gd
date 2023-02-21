@@ -29,11 +29,18 @@ func _process(delta: float):
 		
 func create_encounter():
 	encounter = encounter_scene.instantiate()
+	encounter.on_click_damage.connect(self.on_click_damage)
 	encounter.position = $EncounterMarker.position
+	encounter.in_combat = true
 	add_child(encounter)
 	if encounter != null:
 		encounter_hp = encounter.health
 		
+func on_click_damage():
+	if node_manager.exhaustion <= 95:
+		player_damage(1)
+		node_manager.exhaustion += 5
+	
 func combat(delta):
 	if turn:
 		player_timer += delta
@@ -52,7 +59,6 @@ func combat(delta):
 		queue_free()
 		
 func player_attack():
-	encounter.animation_player.play("Damage")
 	node_manager.exhaustion += 0.5
 	player_damage(randf_range(0,node_manager.pop))
 	turn = false
@@ -75,6 +81,7 @@ func encounter_damage(damage):
 	
 func player_damage(damage):
 	damage_txt_anim($EncounterMarker.global_position,damage, encounter)
+	encounter.animation_player.play("Damage")
 	encounter_hp -= damage
 
 func damage_txt_anim(pos, amount, spot):
