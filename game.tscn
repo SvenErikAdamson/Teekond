@@ -34,6 +34,7 @@ water = 10
 [node name="Island2" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(512, 64)
 encounter_type = ExtResource("5_4ebec")
+food = 10.0
 
 [node name="Island3" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(467, 247)

@@ -54,6 +54,7 @@ func combat(delta):
 		encounter.animation_player.play("Attack")
 	if encounter_hp <= 0:
 		get_parent().encounter_type = null
+		get_parent().current_island = true
 		get_parent().in_progress = false
 		node_manager.player_in_combat = false
 		queue_free()

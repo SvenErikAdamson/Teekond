@@ -40,8 +40,6 @@ func _ready():
 		food_state()
 		scouted = true
 		node_manager.current_island = self
-#	await get_tree().create_timer(randf_range(0,3)).timeout
-#	$AnimationPlayer.play("Hover")
 		
 func _process(delta):
 	forage(delta)
@@ -72,6 +70,8 @@ func food_state():
 		draw_icons(1)
 		sprite.set_frame(2)
 	else:
+		for child in $IconContainer.get_children():
+			child.queue_free()
 		sprite.set_frame(3)
 		
 func draw_icons(amount):
@@ -83,11 +83,11 @@ func draw_icons(amount):
 		$IconContainer.add_child(ico)
 		ico.position.x = offset -30
 		ico.position.y = 50
-		offset += 25
+		offset += 15
 		
 func forage(delta):
 	if current_island:
-		if food >= 0:
+		if food > 0:
 			food -= delta * node_manager.forage_modifier
 			node_manager.food += delta
 		if pop >= 0:

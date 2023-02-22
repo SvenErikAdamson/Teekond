@@ -50,6 +50,7 @@ func scout(node):
 		node.scouted = true
 		node.is_scouted = false
 		scouting_indicator.free()
+		SoundPlayer.play_sound(SoundPlayer.EHAYLEA)
 
 func use_rations(delta):
 	if player_in_winter:

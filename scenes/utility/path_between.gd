@@ -21,4 +21,5 @@ func _physics_process(delta):
 		to.scouted = true
 		node_manager.player_is_moving = false
 		node_manager.exhaustion += from.harshness
+		SoundPlayer.play_sound(SoundPlayer.CLICK)
 		queue_free()
