@@ -2,7 +2,8 @@ extends StaticBody2D
 class_name Island
 
 @export_category("Island Data")
-@export var encounter_type: PackedScene = null
+@export var creature_scene: PackedScene = null
+var encounter_type
 @export var current_island: bool = false
 @export var scouted: bool = false
 @export var food: float = 300.0
@@ -10,54 +11,28 @@ class_name Island
 @export var water: int = 100
 @export var harshness: float = 2.0
 
-@export_category("Additional")
-@export var key_needed: String
-@export var connnection_opened: Node 
-
-@export_category("On Island")
-@export var item: Resource = null
-@export var key: String
-
 @onready var encounter_scene = preload("res://scenes/encounters/encounter.tscn")
 @onready var connector_scene = preload("res://scenes/utility/connector.tscn")
 @onready var icon = load("res://scenes/ui/ingame/icon.tscn")
 @onready var node_manager = get_node("/root/Game/Level")
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var camp: Node2D = $Camp
 @onready var hover_indicator = $HoverIndicator
 
 var max_food: float
 var show_encounter = null
 var in_progress: bool = false
 var encounter_in_progress: bool = false
+var encounter_exists: bool = false
 var is_scouted: bool = false
 var is_combat_on: bool = false
 
 func _ready():
+	encounter_type = creature_scene
 	create_encounter()
-	max_food = food
-	if current_island:
-		food_state()
-		scouted = true
-		node_manager.current_island = self
+	set_variables()
 		
 func _process(delta):
-	forage(delta)
-	if current_island:
-		food_state()
-		camp.show()
-		node_manager.add_key(key)
-	else:
-		camp.hide()
-	if scouted and is_instance_valid(show_encounter):
-		show_encounter.show()
-	if current_island and !encounter_in_progress:
-		check_encounter()
-	if scouted:
-		food_state()
-		sprite.modulate = Color(1,1,1)
-	else:
-		sprite.modulate = Color(0,0,0)
+	check_island_state(delta)
 		
 func food_state():
 	if calc_percentage(food, max_food) >= 90.0:
@@ -86,7 +61,6 @@ func draw_icons(amount):
 		offset += 15
 		
 func forage(delta):
-	if current_island:
 		if food > 0:
 			food -= delta * node_manager.forage_modifier
 			node_manager.food += delta
@@ -114,7 +88,7 @@ func create_encounter():
 		show_encounter.hide()
 
 func check_encounter():
-	if current_island and encounter_type != null and is_instance_valid(show_encounter):
+	if current_island and encounter_type != null and is_instance_valid(show_encounter) and !encounter_exists:
 		show_encounter.queue_free()
 		in_progress = true
 		var encounter = encounter_scene.instantiate()
@@ -122,3 +96,30 @@ func check_encounter():
 		encounter.encounter_scene = encounter_type
 		add_child(encounter)
 		encounter_in_progress = true
+		encounter_exists = true
+		
+func set_variables():
+	max_food = food
+	if current_island:
+		food_state()
+		scouted = true
+		node_manager.current_island = self
+
+func reset_encounter():
+	encounter_in_progress = false
+	encounter_type = creature_scene
+	encounter_exists = false
+	
+func check_island_state(delta):
+	if current_island:
+		forage(delta)
+		food_state()
+	if scouted and is_instance_valid(show_encounter):
+		show_encounter.show()
+	if current_island and !encounter_in_progress:
+		check_encounter()
+	if scouted:
+		food_state()
+		sprite.modulate = Color(1,1,1)
+	else:
+		sprite.modulate = Color(0,0,0)

@@ -3,6 +3,7 @@ extends Node2D
 var encounter_scene = null
 var encounter = null
 
+@onready var island = get_parent()
 var player_hp: int 
 var lost_hp: int
 var encounter_hp: int
@@ -10,6 +11,7 @@ var encounter_hp: int
 @onready var node_manager = get_node("/root/Game/Level")
 @onready var player_animation = $Player/AnimationPlayer
 @onready var damage_label = load("res://scenes/encounters/ui/damage_label.tscn")
+@onready var path_scene = preload("res://scenes/utility/path_between.tscn")
 
 var player_timer := 0.0
 var player_rate := 1
@@ -53,9 +55,9 @@ func combat(delta):
 		encounter.animation_player.speed_scale = 0.8
 		encounter.animation_player.play("Attack")
 	if encounter_hp <= 0:
-		get_parent().encounter_type = null
-		get_parent().current_island = true
-		get_parent().in_progress = false
+		island.encounter_type = null
+		island.current_island = true
+		island.in_progress = false
 		node_manager.player_in_combat = false
 		queue_free()
 		
@@ -95,3 +97,20 @@ func check_death():
 	if lost_hp >= 100:
 		lost_hp -=100
 		node_manager.pop -= 1
+
+func retreat():
+	var path = path_scene.instantiate()
+	path.curve.clear_points()
+	path.curve.add_point(island.global_position - global_position)
+	path.curve.add_point(node_manager.last_island.global_position - global_position)
+	path.to = node_manager.last_island
+	path.from = island
+	island.add_child(path)
+	island.create_encounter()
+	island.reset_encounter()
+	self.queue_free()
+	
+func _on_button_pressed():
+	retreat()
+	queue_free()
+	pass # Replace with function body.

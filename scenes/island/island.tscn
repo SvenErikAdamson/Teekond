@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://wg1gs70n7nbo"]
+[gd_scene load_steps=8 format=3 uid="uid://wg1gs70n7nbo"]
 
 [ext_resource type="Script" path="res://scenes/island/island.gd" id="1_ilmvi"]
 [ext_resource type="Texture2D" uid="uid://ce5t31q31kv8a" path="res://assets/sprites/islands/standard-Sheet.png" id="2_lcv0q"]
-[ext_resource type="PackedScene" uid="uid://b7rwxbogcdtmc" path="res://scenes/island/indicators/camp.tscn" id="3_totjb"]
 [ext_resource type="Texture2D" uid="uid://dbgguw131an07" path="res://assets/sprites/misc/hovered_pointer.png" id="4_wo41w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_heug2"]
@@ -36,18 +35,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 120), Vector2(0, 123), Vector2(0, 120)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Camp:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, -8), Vector2(0, -11), Vector2(0, -8)]
-}
 
 [sub_resource type="Animation" id="Animation_iwbsn"]
 length = 0.001
@@ -74,18 +61,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 120)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Camp:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -8)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ybcko"]
@@ -119,9 +94,6 @@ speed_scale = 0.1
 libraries = {
 "": SubResource("AnimationLibrary_ybcko")
 }
-
-[node name="Camp" parent="." instance=ExtResource("3_totjb")]
-position = Vector2(0, -8)
 
 [node name="HoverIndicator" type="Sprite2D" parent="."]
 visible = false

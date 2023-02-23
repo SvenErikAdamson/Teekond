@@ -33,12 +33,11 @@ water = 10
 
 [node name="Island2" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(512, 64)
-encounter_type = ExtResource("5_4ebec")
+creature_scene = ExtResource("5_4ebec")
 food = 10.0
 
 [node name="Island3" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(467, 247)
-encounter_type = ExtResource("5_4ebec")
 
 [node name="Island4" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(1120, 392)
@@ -47,7 +46,6 @@ position = Vector2(1120, 392)
 position = Vector2(582, -245)
 scouted = true
 food = 0.0
-key = "from5to6"
 
 [node name="Island6" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(1104, -64)
@@ -75,7 +73,6 @@ food = 0.0
 
 [node name="Island12" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(2312, -156)
-encounter_type = ExtResource("5_4ebec")
 food = 0.0
 
 [node name="Island13" parent="Level/Islands" instance=ExtResource("1_i6ghg")]

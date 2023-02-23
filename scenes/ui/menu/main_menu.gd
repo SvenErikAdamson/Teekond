@@ -36,14 +36,14 @@ func _on_back_from_options_pressed():
 	show_and_hide(menu,options)
 
 #Find how that works
-func _on_full_screen_toggled(button_pressed):
-	DisplayServer.WINDOW_MODE_FULLSCREEN
-
-func _on_borderless_toggled(button_pressed):
-	DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
-
-func _on_v_sync_toggled(button_pressed):
-	DisplayServer.VSYNC_ENABLED
+#func _on_full_screen_toggled(button_pressed):
+#	DisplayServer.WINDOW_MODE_FULLSCREEN
+#
+#func _on_borderless_toggled(button_pressed):
+#	DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
+#
+#func _on_v_sync_toggled(button_pressed):
+#	DisplayServer.VSYNC_ENABLED
 
 func _on_back_from_video_pressed():
 	show_and_hide(options, video)

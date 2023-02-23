@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://x4fpiw1u1bd6"]
+[gd_scene load_steps=9 format=3 uid="uid://x4fpiw1u1bd6"]
 
 [ext_resource type="Script" path="res://scenes/encounters/encounter.gd" id="1_gflko"]
 [ext_resource type="Texture2D" uid="uid://cvja3hlikjk0f" path="res://assets/karakter_sheet.png" id="2_yaa4x"]
+[ext_resource type="FontFile" uid="uid://1yl0tcwtd4ql" path="res://assets/m5x7.ttf" id="3_v4akr"]
 
 [sub_resource type="Animation" id="Animation_wu06e"]
 resource_name = "Attack"
@@ -107,3 +108,13 @@ speed_scale = 0.5
 libraries = {
 "": SubResource("AnimationLibrary_3tyrb")
 }
+
+[node name="Button" type="Button" parent="."]
+offset_left = -88.0
+offset_top = -8.0
+offset_right = -41.0
+offset_bottom = 13.0
+theme_override_fonts/font = ExtResource("3_v4akr")
+text = "Retreat"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
