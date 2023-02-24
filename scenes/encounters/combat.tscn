@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://x4fpiw1u1bd6"]
+[gd_scene load_steps=9 format=3 uid="uid://xwbdh51rypnn"]
 
-[ext_resource type="Script" path="res://scenes/encounters/encounter.gd" id="1_gflko"]
-[ext_resource type="Texture2D" uid="uid://cvja3hlikjk0f" path="res://assets/karakter_sheet.png" id="2_yaa4x"]
-[ext_resource type="FontFile" uid="uid://1yl0tcwtd4ql" path="res://assets/m5x7.ttf" id="3_v4akr"]
+[ext_resource type="Script" path="res://scenes/encounters/combat.gd" id="1_ggtus"]
+[ext_resource type="Texture2D" uid="uid://coiod8vae00r" path="res://assets/sprites/character/combat_human-Sheet.png" id="2_q2xej"]
+[ext_resource type="Texture2D" uid="uid://50nhfd6fsbln" path="res://assets/sprites/icons/whiteflag.png" id="3_o54a0"]
 
 [sub_resource type="Animation" id="Animation_wu06e"]
 resource_name = "Attack"
@@ -53,7 +53,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_iyh0w"]
 resource_name = "Idle"
-length = 0.2
+length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -62,10 +62,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 1]
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="Animation" id="Animation_gjpag"]
@@ -91,17 +91,20 @@ _data = {
 "RESET": SubResource("Animation_gjpag")
 }
 
-[node name="encounter" type="Node2D"]
-script = ExtResource("1_gflko")
+[node name="Combat" type="Node2D"]
+script = ExtResource("1_ggtus")
 
-[node name="EncounterMarker" type="Marker2D" parent="."]
+[node name="EnemyMarker" type="Marker2D" parent="."]
 position = Vector2(24.5, -4.5)
+
+[node name="PlayerMarker" type="Marker2D" parent="."]
+position = Vector2(-6.5, -4.5)
 
 [node name="Player" type="Sprite2D" parent="."]
 position = Vector2(-20, 0)
-texture = ExtResource("2_yaa4x")
+texture = ExtResource("2_q2xej")
 hframes = 8
-vframes = 3
+vframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 speed_scale = 0.5
@@ -109,12 +112,10 @@ libraries = {
 "": SubResource("AnimationLibrary_3tyrb")
 }
 
-[node name="Button" type="Button" parent="."]
-offset_left = -88.0
-offset_top = -8.0
-offset_right = -41.0
-offset_bottom = 13.0
-theme_override_fonts/font = ExtResource("3_v4akr")
-text = "Retreat"
+[node name="RetreatButton" type="TextureButton" parent="."]
+offset_left = -80.0
+offset_right = -64.0
+offset_bottom = 16.0
+texture_normal = ExtResource("3_o54a0")
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="RetreatButton" to="." method="_on_button_pressed"]

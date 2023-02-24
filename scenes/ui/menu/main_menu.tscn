@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://chdbxmmfcthwa"]
+[gd_scene load_steps=11 format=3 uid="uid://chdbxmmfcthwa"]
 
 [ext_resource type="Script" path="res://scenes/ui/menu/main_menu.gd" id="1_84707"]
+[ext_resource type="Texture2D" uid="uid://do3tdarip7cm4" path="res://assets/sprites/ui/buttons/play/Play1.png" id="2_636w2"]
+[ext_resource type="Texture2D" uid="uid://dl4mlx0xa7u0r" path="res://assets/sprites/ui/buttons/play/Play2.png" id="3_0tgpo"]
+[ext_resource type="Texture2D" uid="uid://b3tgcdt4u3dis" path="res://assets/sprites/ui/buttons/play/Play3.png" id="4_1cokf"]
+[ext_resource type="Texture2D" uid="uid://b38e28yn53fbp" path="res://assets/sprites/ui/buttons/options/Options1.png" id="5_r60cm"]
+[ext_resource type="Texture2D" uid="uid://c6rkyf1g1usec" path="res://assets/sprites/ui/buttons/options/Options2.png" id="6_8ouxq"]
+[ext_resource type="Texture2D" uid="uid://c16shkwrhwljg" path="res://assets/sprites/ui/buttons/options/Options3.png" id="7_1x0s8"]
+[ext_resource type="Texture2D" uid="uid://eicyn55hyqp4" path="res://assets/sprites/ui/buttons/quit/Quit1.png" id="8_tttf1"]
+[ext_resource type="Texture2D" uid="uid://bjxcldnwqw7ix" path="res://assets/sprites/ui/buttons/quit/Quit2.png" id="9_57qjg"]
+[ext_resource type="Texture2D" uid="uid://wv7m4allyb12" path="res://assets/sprites/ui/buttons/quit/Quit3.png" id="10_dp268"]
 
 [node name="MainMenu" type="Control"]
 process_mode = 3
@@ -26,17 +35,23 @@ offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Continue" type="Button" parent="Menu"]
+[node name="Continue" type="TextureButton" parent="Menu"]
 layout_mode = 2
-text = "Continue"
+texture_normal = ExtResource("2_636w2")
+texture_pressed = ExtResource("3_0tgpo")
+texture_hover = ExtResource("4_1cokf")
 
-[node name="Options" type="Button" parent="Menu"]
+[node name="Options" type="TextureButton" parent="Menu"]
 layout_mode = 2
-text = "Options"
+texture_normal = ExtResource("5_r60cm")
+texture_pressed = ExtResource("6_8ouxq")
+texture_hover = ExtResource("7_1x0s8")
 
-[node name="Exit" type="Button" parent="Menu"]
+[node name="Exit" type="TextureButton" parent="Menu"]
 layout_mode = 2
-text = "Exit"
+texture_normal = ExtResource("8_tttf1")
+texture_pressed = ExtResource("9_57qjg")
+texture_hover = ExtResource("10_dp268")
 
 [node name="Options" type="Control" parent="."]
 visible = false

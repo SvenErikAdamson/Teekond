@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpnpy4tc088lf"]
+[gd_scene load_steps=14 format=3 uid="uid://bpnpy4tc088lf"]
 
 [ext_resource type="Script" path="res://scenes/ui/menu/start_menu.gd" id="1_u6v20"]
+[ext_resource type="Texture2D" uid="uid://do3tdarip7cm4" path="res://assets/sprites/ui/buttons/play/Play1.png" id="2_xiy1x"]
+[ext_resource type="Texture2D" uid="uid://dl4mlx0xa7u0r" path="res://assets/sprites/ui/buttons/play/Play2.png" id="3_sh8tk"]
+[ext_resource type="Texture2D" uid="uid://b3tgcdt4u3dis" path="res://assets/sprites/ui/buttons/play/Play3.png" id="4_8c4lm"]
+[ext_resource type="Texture2D" uid="uid://bha5ptb2u58k4" path="res://assets/sprites/ui/buttons/editor/Editor1.png" id="5_bwt2m"]
+[ext_resource type="Texture2D" uid="uid://caut6y7uj8vyn" path="res://assets/sprites/ui/buttons/editor/Editor2.png" id="6_hwjt0"]
+[ext_resource type="Texture2D" uid="uid://bsg3shf3fy3fx" path="res://assets/sprites/ui/buttons/editor/Editor3.png" id="7_teh06"]
+[ext_resource type="Texture2D" uid="uid://b38e28yn53fbp" path="res://assets/sprites/ui/buttons/options/Options1.png" id="8_n67pb"]
+[ext_resource type="Texture2D" uid="uid://c6rkyf1g1usec" path="res://assets/sprites/ui/buttons/options/Options2.png" id="9_5vs8f"]
+[ext_resource type="Texture2D" uid="uid://c16shkwrhwljg" path="res://assets/sprites/ui/buttons/options/Options3.png" id="10_fk7vk"]
+[ext_resource type="Texture2D" uid="uid://eicyn55hyqp4" path="res://assets/sprites/ui/buttons/quit/Quit1.png" id="11_huyn4"]
+[ext_resource type="Texture2D" uid="uid://bjxcldnwqw7ix" path="res://assets/sprites/ui/buttons/quit/Quit2.png" id="12_k8it5"]
+[ext_resource type="Texture2D" uid="uid://wv7m4allyb12" path="res://assets/sprites/ui/buttons/quit/Quit3.png" id="13_8hf0i"]
 
 [node name="StartMenu" type="Control"]
 process_mode = 3
@@ -26,21 +38,29 @@ offset_bottom = 50.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Start" type="Button" parent="Menu"]
+[node name="Start" type="TextureButton" parent="Menu"]
 layout_mode = 2
-text = "Start"
+texture_normal = ExtResource("2_xiy1x")
+texture_pressed = ExtResource("3_sh8tk")
+texture_hover = ExtResource("4_8c4lm")
 
-[node name="Editor" type="Button" parent="Menu"]
+[node name="Editor" type="TextureButton" parent="Menu"]
 layout_mode = 2
-text = "Editor"
+texture_normal = ExtResource("5_bwt2m")
+texture_pressed = ExtResource("6_hwjt0")
+texture_hover = ExtResource("7_teh06")
 
-[node name="Options" type="Button" parent="Menu"]
+[node name="Options" type="TextureButton" parent="Menu"]
 layout_mode = 2
-text = "Options"
+texture_normal = ExtResource("8_n67pb")
+texture_pressed = ExtResource("9_5vs8f")
+texture_hover = ExtResource("10_fk7vk")
 
-[node name="Exit" type="Button" parent="Menu"]
+[node name="Exit" type="TextureButton" parent="Menu"]
 layout_mode = 2
-text = "Exit"
+texture_normal = ExtResource("11_huyn4")
+texture_pressed = ExtResource("12_k8it5")
+texture_hover = ExtResource("13_8hf0i")
 
 [node name="Options" type="Control" parent="."]
 visible = false

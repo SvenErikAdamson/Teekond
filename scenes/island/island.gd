@@ -3,123 +3,177 @@ class_name Island
 
 @export_category("Island Data")
 @export var creature_scene: PackedScene = null
-var encounter_type
 @export var current_island: bool = false
 @export var scouted: bool = false
 @export var food: float = 300.0
 @export var pop: int = 0
-@export var water: int = 100
 @export var harshness: float = 2.0
+@export_category("Island Challenges")
+@export var minigame_scene: PackedScene = null
 
-@onready var encounter_scene = preload("res://scenes/encounters/encounter.tscn")
+@onready var combat_scene = preload("res://scenes/encounters/combat.tscn")
 @onready var connector_scene = preload("res://scenes/utility/connector.tscn")
-@onready var icon = load("res://scenes/ui/ingame/icon.tscn")
-@onready var node_manager = get_node("/root/Game/Level")
+@onready var food_icon_scene = load("res://scenes/ui/ingame/food_icon.tscn")
+@onready var pop_icon_scene = load("res://scenes/ui/ingame/pop_icon.tscn")
+@onready var level_manager = get_node("/root/Game/Level")
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var hover_indicator = $HoverIndicator
+@onready var state_anim = $PlayerState/AnimSprite
 
-var max_food: float
-var show_encounter = null
+var creature_instance
+
 var in_progress: bool = false
-var encounter_in_progress: bool = false
-var encounter_exists: bool = false
 var is_scouted: bool = false
-var is_combat_on: bool = false
+var has_encounter: bool = false
+var is_combat_init: bool = false
+var is_in_minigame: bool = false
 
 func _ready():
-	encounter_type = creature_scene
-	create_encounter()
 	set_variables()
+	if creature_scene != null:
+		has_encounter = true
+		create_creature_prop()
+	else:
+		has_encounter = false
+		
+func end_combat():
+	is_combat_init = false
+	
+func create_creature_prop():
+	creature_instance = creature_scene.instantiate()
+	creature_instance.position = $EnemyPosition.position
+	add_child(creature_instance)
+
+func check_for_combat():
+	if !is_combat_init and has_encounter and current_island:
+		var combat = combat_scene.instantiate()
+		combat.creature_scene = creature_scene
+		add_child(combat)
+		combat.position = $CombatPosition.position
+		is_combat_init = true
 		
 func _process(delta):
 	check_island_state(delta)
+	if !current_island or is_combat_init:
+		state_anim.hide()
 		
-func food_state():
-	if calc_percentage(food, max_food) >= 90.0:
-		draw_icons(3)
-		sprite.set_frame(0)
-	elif calc_percentage(food, max_food) >= 50.0:
-		sprite.set_frame(1)
-		draw_icons(2)
-	elif calc_percentage(food, max_food) >= 30.0:
-		draw_icons(1)
-		sprite.set_frame(2)
+func icon_state():
+	if food >= 90.0:
+		clear_icons($Icons/Food)
+		draw_food_icon(5)
+	elif food >= 50.0:
+		clear_icons($Icons/Food)
+		draw_food_icon(4)
+	elif food >= 30.0:
+		clear_icons($Icons/Food)
+		draw_food_icon(3)
+	elif food >= 15.0:
+		clear_icons($Icons/Food)
+		draw_food_icon(2)
+	elif food >= 1.0:
+		clear_icons($Icons/Food)
+		draw_food_icon(1)
 	else:
-		for child in $IconContainer.get_children():
-			child.queue_free()
-		sprite.set_frame(3)
+		clear_icons($Icons/Food)
 		
-func draw_icons(amount):
-	for child in $IconContainer.get_children():
+	if pop >= 6:
+		clear_icons($Icons/Pop)
+		draw_pop_icon(6)
+	elif pop >= 5:
+		clear_icons($Icons/Pop)
+		draw_pop_icon(5)
+	elif pop >= 4:
+		clear_icons($Icons/Pop)
+		draw_pop_icon(4)
+	elif pop >= 3:
+		clear_icons($Icons/Pop)
+		draw_pop_icon(3)
+	elif pop >= 2:
+		clear_icons($Icons/Pop)
+		draw_pop_icon(2)
+	elif pop >= 1:
+		clear_icons($Icons/Pop)
+		draw_pop_icon(1)
+	else:
+		clear_icons($Icons/Pop)
+		
+func clear_icons(icon):
+	for child in icon.get_children():
 		child.queue_free()
+
+func draw_pop_icon(amount, posy = 64):
+	if food <= 0.0:
+		posy = 50
 	var offset = 0
 	for i in amount:
-		var ico = icon.instantiate()
-		$IconContainer.add_child(ico)
+		var ico = pop_icon_scene.instantiate()
+		$Icons/Pop.add_child(ico)
 		ico.position.x = offset -30
-		ico.position.y = 50
+		ico.position.y = posy
+		offset += 15
+		
+func draw_food_icon(amount, posy = 50):
+	var offset = 0
+	for i in amount:
+		var ico = food_icon_scene.instantiate()
+		$Icons/Food.add_child(ico)
+		ico.position.x = offset -30
+		ico.position.y = posy
 		offset += 15
 		
 func forage(delta):
-		if food > 0:
-			food -= delta * node_manager.forage_modifier
-			node_manager.food += delta
-		if pop >= 0:
-			node_manager.pop += pop
-			pop = 0
+		if food > 0 and !is_combat_init and !is_in_minigame:
+			state_anim.play("Gather")
+			food -= delta * level_manager.forage_modifier
+			level_manager.food += delta * level_manager.forage_modifier
+		else:
+			state_anim.play("Idle")
 			
-		
+func recruit():
+		if pop > 0 and !is_combat_init and !is_in_minigame:
+			level_manager.pop += pop
+			pop = 0
+
 func _on_input_event(_viewport, event, _shape_idx):
-	if event.is_action_pressed("mb_left") and current_island and !in_progress:
+	if event.is_action_pressed("mb_left") and current_island and !in_progress and !is_combat_init and !is_in_minigame:
 		var connector = connector_scene.instantiate()
 		in_progress = true
 		add_child(connector)
-	if event.is_action_pressed("mb_right") and node_manager.check_destination(node_manager.current_island, self):
-		node_manager.scout(self)
+	if event.is_action_pressed("mb_right") and level_manager.check_destination(level_manager.current_island, self):
+		level_manager.scout(self)
 
 func calc_percentage(part_val, tot_val):
 	return (part_val / tot_val)* 100
-	
-func create_encounter():
-	if encounter_type != null:
-		show_encounter = encounter_type.instantiate()
-		show_encounter.position.y = -60
-		add_child(show_encounter)
-		show_encounter.hide()
-
-func check_encounter():
-	if current_island and encounter_type != null and is_instance_valid(show_encounter) and !encounter_exists:
-		show_encounter.queue_free()
-		in_progress = true
-		var encounter = encounter_scene.instantiate()
-		encounter.position.y = -60
-		encounter.encounter_scene = encounter_type
-		add_child(encounter)
-		encounter_in_progress = true
-		encounter_exists = true
-		
+#
 func set_variables():
-	max_food = food
 	if current_island:
-		food_state()
+		icon_state()
 		scouted = true
-		node_manager.current_island = self
+		level_manager.current_island = self
 
-func reset_encounter():
-	encounter_in_progress = false
-	encounter_type = creature_scene
-	encounter_exists = false
-	
+func create_minigame():
+	if minigame_scene != null and !is_in_minigame:
+		var minigame = minigame_scene.instantiate()
+		add_child(minigame)
+		minigame.position = $MiniGamePosition.position
+		is_in_minigame = true
+		
 func check_island_state(delta):
 	if current_island:
+		check_for_combat()
 		forage(delta)
-		food_state()
-	if scouted and is_instance_valid(show_encounter):
-		show_encounter.show()
-	if current_island and !encounter_in_progress:
-		check_encounter()
+		recruit()
+		icon_state()
+		create_minigame()
+		state_anim.show()
 	if scouted:
-		food_state()
+		icon_state()
+		if is_instance_valid(creature_instance):
+			creature_instance.show()
 		sprite.modulate = Color(1,1,1)
 	else:
+		if is_instance_valid(creature_instance):
+			creature_instance.hide()
 		sprite.modulate = Color(0,0,0)
+

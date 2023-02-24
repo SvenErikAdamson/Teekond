@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bum3r0d47ah4h"]
+
+[ext_resource type="Texture2D" uid="uid://dskrd11sqbt24" path="res://assets/sprites/icons/pop.png" id="1_njkfg"]
+
+[node name="Icon" type="Sprite2D"]
+texture = ExtResource("1_njkfg")

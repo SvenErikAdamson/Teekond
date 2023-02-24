@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://wg1gs70n7nbo"]
+[gd_scene load_steps=25 format=3 uid="uid://wg1gs70n7nbo"]
 
 [ext_resource type="Script" path="res://scenes/island/island.gd" id="1_ilmvi"]
 [ext_resource type="Texture2D" uid="uid://ce5t31q31kv8a" path="res://assets/sprites/islands/standard-Sheet.png" id="2_lcv0q"]
+[ext_resource type="Texture2D" uid="uid://8h84grbph7jf" path="res://assets/sprites/character/TribesMan_Forage-Sheet.png" id="4_kfod4"]
 [ext_resource type="Texture2D" uid="uid://dbgguw131an07" path="res://assets/sprites/misc/hovered_pointer.png" id="4_wo41w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_heug2"]
@@ -26,7 +27,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("shadow:position")
+tracks/1/path = NodePath("Shadow:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -53,7 +54,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("shadow:position")
+tracks/1/path = NodePath("Shadow:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -69,6 +70,124 @@ _data = {
 "RESET": SubResource("Animation_iwbsn")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8a8sr"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6x2r"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7fyp"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55ijd"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfkxd"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpw0c"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kb7yi"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(288, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7ojf"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(336, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_reo4w"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(384, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc3k4"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(432, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjmrd"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(480, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3odxf"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsmhu"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmgkp"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dnj7"]
+atlas = ExtResource("4_kfod4")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6jm17"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a8sr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6x2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7fyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55ijd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfkxd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dpw0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kb7yi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7ojf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_reo4w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc3k4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjmrd")
+}],
+"loop": true,
+"name": &"Gather",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3odxf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsmhu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qmgkp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dnj7")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
 [node name="Island" type="StaticBody2D"]
 z_index = 2
 input_pickable = true
@@ -79,7 +198,7 @@ position = Vector2(0, -3)
 texture = ExtResource("2_lcv0q")
 hframes = 4
 
-[node name="shadow" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 0.454902)
 position = Vector2(0, 120)
@@ -100,6 +219,27 @@ visible = false
 position = Vector2(0, -72)
 texture = ExtResource("4_wo41w")
 
-[node name="IconContainer" type="Node2D" parent="."]
+[node name="Icons" type="Node2D" parent="."]
+
+[node name="Food" type="Node2D" parent="Icons"]
+
+[node name="Pop" type="Node2D" parent="Icons"]
+
+[node name="EnemyPosition" type="Marker2D" parent="."]
+position = Vector2(0, -7)
+
+[node name="CombatPosition" type="Marker2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="MiniGamePosition" type="Marker2D" parent="."]
+position = Vector2(0, -63)
+
+[node name="PlayerState" type="Node2D" parent="."]
+
+[node name="AnimSprite" type="AnimatedSprite2D" parent="PlayerState"]
+visible = false
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_6jm17")
+animation = &"Idle"
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

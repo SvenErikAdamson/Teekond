@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3vtl0rgckw7y"]
+[gd_scene load_steps=5 format=3 uid="uid://b3vtl0rgckw7y"]
 
+[ext_resource type="Texture2D" uid="uid://dx2v41a158xs" path="res://assets/sprites/misc/dotted_connection.png" id="1_40haq"]
 [ext_resource type="Script" path="res://scenes/utility/connector.gd" id="1_lw1g3"]
 [ext_resource type="Texture2D" uid="uid://c75n37r2x6hnd" path="res://assets/sprites/misc/pointer.png" id="2_ntbbx"]
 
@@ -9,17 +10,17 @@ size = Vector2(26, 27)
 [node name="Connector" type="Line2D"]
 z_index = 2
 points = PackedVector2Array(0, 0, 0, 0)
-width = 3.0
 default_color = Color(0.721569, 0.976471, 0, 1)
+texture = ExtResource("1_40haq")
+texture_mode = 1
 begin_cap_mode = 2
 end_cap_mode = 2
-sharp_limit = 4.0
-round_precision = 12
 script = ExtResource("1_lw1g3")
 
 [node name="Hand" type="Area2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Hand"]
+visible = false
 modulate = Color(1, 0, 1, 1)
 texture = ExtResource("2_ntbbx")
 

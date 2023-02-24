@@ -1,7 +1,32 @@
-[gd_scene load_steps=11 format=3 uid="uid://df8qyvljg4v1o"]
+[gd_scene load_steps=18 format=3 uid="uid://df8qyvljg4v1o"]
 
 [ext_resource type="Script" path="res://scenes/island/indicators/scouting_indicator.gd" id="1_s8f55"]
 [ext_resource type="Texture2D" uid="uid://c86ivab00chrg" path="res://assets/sprites/misc/scout.png" id="1_t16yo"]
+[ext_resource type="Texture2D" uid="uid://8h84grbph7jf" path="res://assets/sprites/character/TribesMan_Forage-Sheet.png" id="2_xcqjw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyf3t"]
+atlas = ExtResource("2_xcqjw")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlaky"]
+atlas = ExtResource("2_xcqjw")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvy7n"]
+atlas = ExtResource("2_xcqjw")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywftt"]
+atlas = ExtResource("2_xcqjw")
+region = Rect2(144, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u24w"]
+atlas = ExtResource("2_xcqjw")
+region = Rect2(192, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nob3"]
+atlas = ExtResource("2_xcqjw")
+region = Rect2(240, 96, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7e3wb"]
 atlas = ExtResource("1_t16yo")
@@ -35,6 +60,29 @@ region = Rect2(32, 0, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_xyf3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlaky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvy7n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywftt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u24w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nob3")
+}],
+"loop": true,
+"name": &"Scout",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_7e3wb")
 }, {
 "duration": 1.0,
@@ -65,4 +113,4 @@ script = ExtResource("1_s8f55")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cof8j")
-frame_progress = 0.941228
+animation = &"Scout"

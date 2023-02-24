@@ -1,6 +1,6 @@
 extends Line2D
 
-@onready var node_manager = get_node("/root/Game/Level")
+@onready var level_manager = get_node("/root/Game/Level")
 @onready var path_scene = preload("res://scenes/utility/path_between.tscn")
 @onready var tip = $Hand
 
@@ -13,10 +13,11 @@ func _ready():
 	
 func _process(_delta):
 	set_positions()
-	if Input.is_action_just_released("mb_left") and focused_island != null and node_manager.exhaustion <= 90:
-		print("Can travel to node: " + str(node_manager.check_destination(from,focused_island)))
-		if node_manager.check_destination(from,focused_island):
-			create_path()
+	if Input.is_action_just_released("mb_left") and focused_island != null and level_manager.exhaustion <= 90:
+		var distance = from.position.distance_to(focused_island.position)
+		print("Can travel to node: " + str(level_manager.check_destination(from,focused_island)))
+		if level_manager.check_destination(from,focused_island):
+			create_path(distance)
 			queue_free()
 		else:
 			from.in_progress = false
@@ -29,8 +30,9 @@ func set_positions():
 	tip.global_position = get_global_mouse_position()
 	set_point_position(1,get_local_mouse_position())
 	
-func create_path():
+func create_path(distance):
 	var path = path_scene.instantiate()
+	path.speed = 1.0 / (distance / 500)
 	path.curve.clear_points()
 	path.curve.add_point(from.global_position - global_position)
 	path.curve.add_point(focused_island.global_position - global_position)

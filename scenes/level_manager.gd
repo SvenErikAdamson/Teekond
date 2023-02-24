@@ -1,11 +1,11 @@
 extends Node2D
 
-var node_list: Dictionary
+var island_list: Dictionary
 var current_island: Node
-var hovered_island: Node
-var last_island: Node 
+var hovered_island:  Node
+var last_island:  Node
 
-@export var forage_modifier: float = 1.0
+@export var forage_modifier: float = 3.0
 @export var combat_modifier: float = 1.0
 @export var rest_modifier: float = 1.0
 @export var winter_modifier: float = 2.0
@@ -26,29 +26,33 @@ func _process(delta):
 	exhaustion_check()
 	use_rations(delta)
 	rest(delta)
+	forage_modifier = pop * 1.0
 	
-func add_connection(node, con):
-	if !node_list.has(node):
-		node_list[node] = []
-	node_list[node].append(con)
+func add_connection(island, con):
+	if !island_list.has(island):
+		island_list[island] = []
+	island_list[island].append(con)
 
+func get_distance(from,to):
+	return from.distance_to(to)
+	
 func check_destination(from, to):
-	if node_list[from].has(to):
+	if island_list[from].has(to):
 		return true
 	else:
 		return false
 
-func scout(node):
-	if !node.is_scouted and !node.scouted and food > 8:
+func scout(island):
+	if !island.is_scouted and !island.scouted and food > 8:
 		food -= 5
 		var scouting_indicator = scouting_indicator_scene.instantiate()
-		node.add_child(scouting_indicator)
+		island.add_child(scouting_indicator)
 		pop -= 1
-		node.is_scouted = true
+		island.is_scouted = true
 		await get_tree().create_timer(2).timeout
 		pop += 1
-		node.scouted = true
-		node.is_scouted = false
+		island.scouted = true
+		island.is_scouted = false
 		scouting_indicator.free()
 		SoundPlayer.play_sound(SoundPlayer.EHAYLEA)
 
@@ -67,16 +71,3 @@ func exhaustion_check():
 		exhaustion = 100
 	elif exhaustion < 0:
 		exhaustion = 0
-		
-func food_check():
-	pass
-
-func check_key(key):
-	if key_list.has(key):
-		return true
-	else:
-		return false
-		
-func add_key(key):
-	if check_key(key):
-		key_list.append(key)

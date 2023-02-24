@@ -1,18 +1,23 @@
-[gd_scene load_steps=14 format=3 uid="uid://c6byyvp5ypjmq"]
+[gd_scene load_steps=15 format=3 uid="uid://c6byyvp5ypjmq"]
 
 [ext_resource type="PackedScene" uid="uid://wg1gs70n7nbo" path="res://scenes/island/island.tscn" id="1_i6ghg"]
 [ext_resource type="Script" path="res://scenes/level_manager.gd" id="1_om1mu"]
 [ext_resource type="Script" path="res://scenes/utility/camera_controller.gd" id="2_jfjvg"]
 [ext_resource type="PackedScene" uid="uid://bhpk12v6wyq8m" path="res://scenes/island/connection.tscn" id="2_rdx8w"]
 [ext_resource type="Script" path="res://scenes/ui/ui_manager.gd" id="4_ytuiy"]
-[ext_resource type="PackedScene" uid="uid://dig1kiob30hq0" path="res://scenes/encounters/data/dollmer.tscn" id="5_4ebec"]
-[ext_resource type="PackedScene" uid="uid://djshw8qfx25nl" path="res://scenes/editor/winter.tscn" id="6_o3er2"]
-[ext_resource type="AudioStream" uid="uid://c5l1wqp6yfs1r" path="res://assets/sound/ingame_song.mp3" id="7_tw2vb"]
+[ext_resource type="PackedScene" uid="uid://6c0bbj4riqy5" path="res://scenes/encounters/data/Shep.tscn" id="5_qs6up"]
+[ext_resource type="PackedScene" uid="uid://c3l2u1flfjtk3" path="res://scenes/interactives/struggle_minigame.tscn" id="6_h6b6e"]
 [ext_resource type="Texture2D" uid="uid://dskrd11sqbt24" path="res://assets/sprites/icons/pop.png" id="8_5phof"]
 [ext_resource type="FontFile" uid="uid://1yl0tcwtd4ql" path="res://assets/m5x7.ttf" id="9_sgapp"]
 [ext_resource type="Texture2D" uid="uid://bgsghea166yr6" path="res://assets/sprites/icons/food.png" id="10_ufr34"]
 [ext_resource type="Texture2D" uid="uid://do5uhcm6d6leq" path="res://assets/sprites/icons/water.png" id="11_6qias"]
 [ext_resource type="PackedScene" uid="uid://chdbxmmfcthwa" path="res://scenes/ui/menu/main_menu.tscn" id="11_7cetr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_da8rt"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h7bpt"]
+bg_color = Color(0.984314, 1, 0.52549, 1)
 
 [node name="Game" type="Node2D"]
 
@@ -29,27 +34,32 @@ script = ExtResource("2_jfjvg")
 position = Vector2(259, -61)
 current_island = true
 food = 10.0
-water = 10
 
 [node name="Island2" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(512, 64)
-creature_scene = ExtResource("5_4ebec")
 food = 10.0
+pop = 2
 
 [node name="Island3" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(467, 247)
+food = 60.0
+pop = 3
+minigame_scene = ExtResource("6_h6b6e")
 
 [node name="Island4" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(1120, 392)
 
 [node name="Island5" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(582, -245)
+creature_scene = ExtResource("5_qs6up")
 scouted = true
 food = 0.0
+pop = 3
 
 [node name="Island6" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(1104, -64)
-food = 0.0
+food = 10.0
+pop = 1
 
 [node name="Island7" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(1488, -280)
@@ -81,6 +91,30 @@ food = 0.0
 
 [node name="Island14" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(2971, -304)
+food = 0.0
+
+[node name="Island15" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(3159, -64)
+food = 0.0
+
+[node name="Island16" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(3194, -537)
+food = 0.0
+
+[node name="Island17" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(3401, -302)
+food = 0.0
+
+[node name="Island18" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(3509, 4)
+food = 0.0
+
+[node name="Island19" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(3538, -561)
+food = 0.0
+
+[node name="Island20" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(3763, -309)
 food = 0.0
 
 [node name="Connections" type="Node2D" parent="Level"]
@@ -161,18 +195,29 @@ node1 = NodePath("../../Islands/Island12")
 node2 = NodePath("../../Islands/Island13")
 
 [node name="Connection16" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
-position = Vector2(3046, -159)
+position = Vector2(2853, -229)
 node1 = NodePath("../../Islands/Island13")
 node2 = NodePath("../../Islands/Island14")
 
-[node name="Winter" parent="Level" instance=ExtResource("6_o3er2")]
-position = Vector2(-992, 0)
+[node name="Connection17" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(2962, -88)
+node1 = NodePath("../../Islands/Island15")
+node2 = NodePath("../../Islands/Island13")
 
-[node name="Node" type="Node" parent="Level"]
+[node name="Connection18" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(3344, -22)
+node1 = NodePath("../../Islands/Island15")
+node2 = NodePath("../../Islands/Island18")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Level/Node"]
-stream = ExtResource("7_tw2vb")
-autoplay = true
+[node name="Connection19" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(3201, -301)
+node1 = NodePath("../../Islands/Island17")
+node2 = NodePath("../../Islands/Island14")
+
+[node name="Connection20" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(3072, -449)
+node1 = NodePath("../../Islands/Island16")
+node2 = NodePath("../../Islands/Island14")
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("4_ytuiy")
@@ -201,15 +246,6 @@ layout_mode = 2
 [node name="Icons" type="HBoxContainer" parent="UI/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="UI/Control/MarginContainer/VBoxContainer/Icons"]
-layout_mode = 2
-texture = ExtResource("8_5phof")
-
-[node name="PopLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/Icons"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_sgapp")
-text = "5"
-
 [node name="TextureRect2" type="TextureRect" parent="UI/Control/MarginContainer/VBoxContainer/Icons"]
 layout_mode = 2
 texture = ExtResource("10_ufr34")
@@ -228,16 +264,27 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("9_sgapp")
 text = "30"
 
+[node name="TextureRect" type="TextureRect" parent="UI/Control/MarginContainer/VBoxContainer/Icons"]
+layout_mode = 2
+texture = ExtResource("8_5phof")
+
+[node name="PopLabel" type="Label" parent="UI/Control/MarginContainer/VBoxContainer/Icons"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_sgapp")
+text = "5"
+
 [node name="ExhaustionBar" type="ProgressBar" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -64.0
-offset_top = 3.0
-offset_right = 64.0
-offset_bottom = 19.0
+offset_left = -294.0
+offset_top = 2.0
+offset_right = -166.0
+offset_bottom = 21.0
 grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_da8rt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_h7bpt")
 show_percentage = false
 
 [node name="MainMenu" parent="UI" instance=ExtResource("11_7cetr")]
