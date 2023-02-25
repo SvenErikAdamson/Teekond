@@ -72,6 +72,7 @@ func combat(delta):
 		queue_free()
 
 func player_attack():
+	SoundPlayer.play_sound(SoundPlayer.MELEE_HIT)
 	level_manager.exhaustion += 0.5
 	player_damage(randf_range(0,level_manager.pop))
 	turn = false
@@ -80,6 +81,7 @@ func player_attack():
 	player_animation.play("Idle")
 
 func creature_attack():
+	SoundPlayer.play_sound(SoundPlayer.ANIMAL_HIT)
 	player_animation.play("Damage")
 	creature_damage(randf_range(creature.min_dmg,creature.max_dmg))
 	turn = true

@@ -1,9 +1,8 @@
 extends StaticBody2D
 
-var health: float = 11
-var min_dmg: int  = 1
-var max_dmg: int = 5
-
+var health: float = 25
+var min_dmg: int  = 8
+var max_dmg: int = 27
 var parent: Node 
 var in_combat: bool = false
 

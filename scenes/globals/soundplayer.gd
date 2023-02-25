@@ -9,6 +9,9 @@ const EHEE = preload("res://assets/sound/slavicwomen_eeeeheeeee.mp3")
 const CLICK = preload("res://assets/sound/clicky_duDU.mp3")
 const EAT = preload("res://assets/sound/eating.mp3")
 
+##Tribe
+const MELEE_HIT = preload("res://assets/sound/tribe/melee sound.wav")
+const ANIMAL_HIT = preload("res://assets/sound/tribe/animal melee sound.wav")
 @onready var audioplayers = $AudioPlayers
 
 func play_sound(sound):

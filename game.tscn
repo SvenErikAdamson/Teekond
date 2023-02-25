@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c6byyvp5ypjmq"]
+[gd_scene load_steps=18 format=3 uid="uid://c6byyvp5ypjmq"]
 
 [ext_resource type="PackedScene" uid="uid://wg1gs70n7nbo" path="res://scenes/island/island.tscn" id="1_i6ghg"]
 [ext_resource type="Script" path="res://scenes/level_manager.gd" id="1_om1mu"]
@@ -6,7 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bhpk12v6wyq8m" path="res://scenes/island/connection.tscn" id="2_rdx8w"]
 [ext_resource type="Script" path="res://scenes/ui/ui_manager.gd" id="4_ytuiy"]
 [ext_resource type="PackedScene" uid="uid://6c0bbj4riqy5" path="res://scenes/encounters/data/Shep.tscn" id="5_qs6up"]
+[ext_resource type="PackedScene" uid="uid://b1shpigd6sem7" path="res://scenes/encounters/data/cato.tscn" id="5_vhypp"]
+[ext_resource type="PackedScene" uid="uid://c3pstpkt3xphp" path="res://scenes/encounters/data/wolfr.tscn" id="6_gxt12"]
 [ext_resource type="PackedScene" uid="uid://c3l2u1flfjtk3" path="res://scenes/interactives/struggle_minigame.tscn" id="6_h6b6e"]
+[ext_resource type="PackedScene" uid="uid://ctk507kq7yc53" path="res://scenes/encounters/data/bigum.tscn" id="7_1orpv"]
 [ext_resource type="Texture2D" uid="uid://dskrd11sqbt24" path="res://assets/sprites/icons/pop.png" id="8_5phof"]
 [ext_resource type="FontFile" uid="uid://1yl0tcwtd4ql" path="res://assets/m5x7.ttf" id="9_sgapp"]
 [ext_resource type="Texture2D" uid="uid://bgsghea166yr6" path="res://assets/sprites/icons/food.png" id="10_ufr34"]
@@ -48,6 +51,7 @@ minigame_scene = ExtResource("6_h6b6e")
 
 [node name="Island4" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(1120, 392)
+creature_scene = ExtResource("5_vhypp")
 
 [node name="Island5" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(582, -245)
@@ -75,6 +79,7 @@ food = 0.0
 
 [node name="Island10" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(1739, -100)
+creature_scene = ExtResource("6_gxt12")
 food = 0.0
 
 [node name="Island11" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
@@ -103,10 +108,12 @@ food = 0.0
 
 [node name="Island17" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(3401, -302)
+creature_scene = ExtResource("7_1orpv")
 food = 0.0
 
 [node name="Island18" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(3509, 4)
+creature_scene = ExtResource("7_1orpv")
 food = 0.0
 
 [node name="Island19" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
