@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dw2fj725ba7vh"
-path="res://.godot/imported/big-creatur.png-697e96daa89147d7efa137439a82bd44.ctex"
+uid="uid://dlg6s6mebh7r0"
+path="res://.godot/imported/cloud6.png-97eac38970f6c88b7461e9d7626bc471.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/big-creatur.png"
-dest_files=["res://.godot/imported/big-creatur.png-697e96daa89147d7efa137439a82bd44.ctex"]
+source_file="res://assets/sprites/weather/cloud6.png"
+dest_files=["res://.godot/imported/cloud6.png-97eac38970f6c88b7461e9d7626bc471.ctex"]
 
 [params]
 

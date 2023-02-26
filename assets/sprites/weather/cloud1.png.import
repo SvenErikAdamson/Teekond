@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbfeqsurqc1ny"
-path="res://.godot/imported/Islands-Sheet.png-9301bed781cf9b7ea546d89561e6f9ca.ctex"
+uid="uid://qxck8tlwtt4a"
+path="res://.godot/imported/cloud1.png-1bfd06b9fccbc2360544930969cac1b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Islands-Sheet.png"
-dest_files=["res://.godot/imported/Islands-Sheet.png-9301bed781cf9b7ea546d89561e6f9ca.ctex"]
+source_file="res://assets/sprites/weather/cloud1.png"
+dest_files=["res://.godot/imported/cloud1.png-1bfd06b9fccbc2360544930969cac1b5.ctex"]
 
 [params]
 

@@ -176,4 +176,3 @@ func check_island_state(delta):
 		if is_instance_valid(creature_instance):
 			creature_instance.hide()
 		sprite.modulate = Color(0,0,0)
-

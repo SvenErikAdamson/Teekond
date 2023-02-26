@@ -54,11 +54,10 @@ func scout(island):
 		island.scouted = true
 		island.is_scouted = false
 		scouting_indicator.free()
-		SoundPlayer.play_sound(SoundPlayer.EHAYLEA)
 
 func use_rations(delta):
 	if player_in_winter:
-		food -= delta * winter_modifier
+		food -= delta * winter_modifier * (float(pop) / 2)
 	else:
 		food -= delta
 

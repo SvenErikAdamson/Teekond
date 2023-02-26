@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c53g35oxvkw3p"]
+
+[ext_resource type="Texture2D" uid="uid://br1nyxxsektg" path="res://assets/sprites/ui/panel/menupanel.png" id="1_ktmwl"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_ktmwl")
+region_rect = Rect2(14.0244, 2.91844, 6.6214, 1.35131)
+patch_margin_top = 5

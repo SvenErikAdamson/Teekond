@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://vrx5ciwy8655"]
+
+[ext_resource type="Script" path="res://scenes/ui/menu/tribe_pick.gd" id="1_3w4ux"]
+[ext_resource type="Texture2D" uid="uid://do3tdarip7cm4" path="res://assets/sprites/ui/buttons/play/Play1.png" id="2_l8cbl"]
+[ext_resource type="Texture2D" uid="uid://dl4mlx0xa7u0r" path="res://assets/sprites/ui/buttons/play/Play2.png" id="3_y8ewl"]
+[ext_resource type="Texture2D" uid="uid://b3tgcdt4u3dis" path="res://assets/sprites/ui/buttons/play/Play3.png" id="4_eequ4"]
+
+[node name="TribeMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3w4ux")
+
+[node name="Menu" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -50.5
+offset_right = 35.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/VBoxContainer/Panel"]
+layout_mode = 2
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 125.0
+offset_bottom = 59.0
+text = "Ilust text ja mida muud saabki iilusamat siin olla, kõike ilusat, mis olemas on.
+See hõim on võitmatu ja lahe
+"
+tab_size = 5
+
+[node name="Start" type="TextureButton" parent="Menu/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("2_l8cbl")
+texture_pressed = ExtResource("3_y8ewl")
+texture_hover = ExtResource("4_eequ4")
+
+[connection signal="pressed" from="Menu/VBoxContainer/Start" to="." method="_on_start_pressed"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4pwy8m01shvc"
-path="res://.godot/imported/Ocean_SpriteSheet.png-c275ea75d0b4ed76343b017db743e7e3.ctex"
+uid="uid://b4vm746df1wrl"
+path="res://.godot/imported/cloud3.png-b7f8b6cece02c6969bfbc6f968b42ac4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sound/Ocean_SpriteSheet.png"
-dest_files=["res://.godot/imported/Ocean_SpriteSheet.png-c275ea75d0b4ed76343b017db743e7e3.ctex"]
+source_file="res://assets/sprites/weather/cloud3.png"
+dest_files=["res://.godot/imported/cloud3.png-b7f8b6cece02c6969bfbc6f968b42ac4.ctex"]
 
 [params]
 

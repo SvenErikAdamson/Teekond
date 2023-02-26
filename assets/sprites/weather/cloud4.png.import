@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvja3hlikjk0f"
-path="res://.godot/imported/karakter_sheet.png-a40cd6e60b238d19ed25075fb0450441.ctex"
+uid="uid://bojwvxcyg238a"
+path="res://.godot/imported/cloud4.png-0008346545bb8d416a28d3857e7ce765.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/karakter_sheet.png"
-dest_files=["res://.godot/imported/karakter_sheet.png-a40cd6e60b238d19ed25075fb0450441.ctex"]
+source_file="res://assets/sprites/weather/cloud4.png"
+dest_files=["res://.godot/imported/cloud4.png-0008346545bb8d416a28d3857e7ce765.ctex"]
 
 [params]
 
