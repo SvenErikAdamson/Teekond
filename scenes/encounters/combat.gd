@@ -10,6 +10,7 @@ var creature_hp: int
 @onready var level_manager = get_node("/root/Game/Level")
 @onready var player_animation = $Player/AnimationPlayer
 @onready var damage_label = load("res://scenes/encounters/ui/damage_label.tscn")
+@onready var pop_lost = load("res://scenes/ui/ingame/pop_lost.tscn")
 @onready var path_scene = preload("res://scenes/utility/path_between.tscn")
 
 var player_timer := 0.0
@@ -74,7 +75,7 @@ func combat(delta):
 func player_attack():
 	SoundPlayer.play_sound(SoundPlayer.MELEE_HIT)
 	level_manager.exhaustion += 0.5
-	player_damage(randf_range(0,level_manager.pop))
+	player_damage(randf_range(1,level_manager.pop))
 	turn = false
 	creature_timer = 0.0
 	player_animation.speed_scale = 0.5
@@ -105,10 +106,17 @@ func damage_txt_anim(pos, amount, spot):
 	dmg_label.global_position = pos
 	dmg_label.text = str(int(amount))
 
+func lost_pop_anim(pos,amount,spot):
+	var popl = pop_lost.instantiate()
+	spot.add_child(popl)
+	popl.global_position = pos 
+	popl.damage = str(int(amount))
+	
 func check_death():
 	if lost_hp >= 100:
 		lost_hp -=100
 		level_manager.pop -= 1
+		lost_pop_anim($Player.global_position - Vector2(0, 40), "-1", $Player)
 
 func retreat():
 	var path = path_scene.instantiate()

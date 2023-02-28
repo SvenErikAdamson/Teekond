@@ -29,6 +29,9 @@ bg_color = Color(0.984314, 1, 0.52549, 1)
 [node name="Level" type="Node2D" parent="."]
 script = ExtResource("1_om1mu")
 
+[node name="Winter" parent="Level" instance=ExtResource("4_q32ig")]
+position = Vector2(1012, -603)
+
 [node name="CloudSpawner" type="Node2D" parent="Level"]
 script = ExtResource("2_cshct")
 
@@ -40,9 +43,6 @@ one_shot = true
 [node name="Camera2D" type="Camera2D" parent="Level"]
 position_smoothing_enabled = true
 script = ExtResource("2_jfjvg")
-
-[node name="Winter" parent="Level/Camera2D" instance=ExtResource("4_q32ig")]
-position = Vector2(0, -240)
 
 [node name="Islands" type="Node2D" parent="Level"]
 
@@ -180,8 +180,100 @@ food = 0.0
 position = Vector2(2625, 888)
 food = 0.0
 
+[node name="Island51" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(2964, 828)
+food = 0.0
+
+[node name="Island52" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(3268, 762)
+food = 0.0
+
+[node name="Island53" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(3559, 777)
+food = 0.0
+
+[node name="Island54" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(3859, 773)
+food = 0.0
+
 [node name="Island31" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(2648, 547)
+food = 0.0
+
+[node name="Island32" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(3743, -682)
+food = 0.0
+
+[node name="Island33" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(4028, -592)
+food = 0.0
+
+[node name="Island34" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(4165, -363)
+food = 0.0
+
+[node name="Island35" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(4535, -385)
+food = 0.0
+
+[node name="Island36" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(4838, -351)
+food = 0.0
+
+[node name="Island37" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(4293, 218)
+food = 0.0
+
+[node name="Island38" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(4592, 274)
+food = 0.0
+
+[node name="Island39" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(4806, 76)
+food = 0.0
+
+[node name="Island40" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(5004, -151)
+food = 0.0
+
+[node name="Island41" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(4665, -148)
+food = 0.0
+
+[node name="Island42" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(5306, -156)
+food = 0.0
+
+[node name="Island43" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(5544, -156)
+food = 0.0
+
+[node name="Island44" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(5656, -356)
+food = 0.0
+
+[node name="Island45" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(5814, -164)
+food = 0.0
+
+[node name="Island46" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(5675, 50)
+food = 0.0
+
+[node name="Island47" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(6025, -346)
+food = 0.0
+
+[node name="Island48" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(6307, -329)
+food = 0.0
+
+[node name="Island49" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(6182, -130)
+food = 0.0
+
+[node name="Island50" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
+position = Vector2(6561, -215)
 food = 0.0
 
 [node name="Connections" type="Node2D" parent="Level"]
@@ -340,6 +432,46 @@ node2 = NodePath("../../Islands/Island14")
 position = Vector2(1551, 219)
 node1 = NodePath("../../Islands/Island21")
 node2 = NodePath("../../Islands/Island8")
+
+[node name="Connection32" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(2488, 528)
+node1 = NodePath("../../Islands/Island27")
+node2 = NodePath("../../Islands/Island31")
+
+[node name="Connection33" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(2642, 736)
+node1 = NodePath("../../Islands/Island30")
+node2 = NodePath("../../Islands/Island31")
+
+[node name="Connection35" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(2786, 862)
+node1 = NodePath("../../Islands/Island30")
+node2 = NodePath("../../Islands/Island51")
+
+[node name="Connection36" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(3123, 793)
+node1 = NodePath("../../Islands/Island51")
+node2 = NodePath("../../Islands/Island52")
+
+[node name="Connection37" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(3413, 775)
+node1 = NodePath("../../Islands/Island52")
+node2 = NodePath("../../Islands/Island53")
+
+[node name="Connection38" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(3704, 777)
+node1 = NodePath("../../Islands/Island54")
+node2 = NodePath("../../Islands/Island53")
+
+[node name="Connection39" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(3871, 643)
+node1 = NodePath("../../Islands/Island54")
+node2 = NodePath("../../Islands/Island24")
+
+[node name="Connection34" parent="Level/Connections" node_paths=PackedStringArray("node1", "node2") instance=ExtResource("2_rdx8w")]
+position = Vector2(2434, 929)
+node1 = NodePath("../../Islands/Island28")
+node2 = NodePath("../../Islands/Island30")
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("4_ytuiy")

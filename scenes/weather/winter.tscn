@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1lgbysdyncgq"]
+[gd_scene load_steps=5 format=3 uid="uid://c1lgbysdyncgq"]
+
+[ext_resource type="Script" path="res://scenes/weather/winter.gd" id="1_8uhue"]
 
 [sub_resource type="Curve" id="Curve_5lnnp"]
 min_value = -60.0
@@ -19,10 +21,11 @@ orbit_velocity_max = 0.0
 tangential_accel_curve = SubResource("CurveTexture_6f4ct")
 
 [node name="Winter" type="Node2D"]
+script = ExtResource("1_8uhue")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 800
+amount = 1200
 sub_emitter = NodePath(".")
 process_material = SubResource("ParticleProcessMaterial_xcsmg")
-lifetime = 10.0
+lifetime = 15.0
 randomness = 1.0

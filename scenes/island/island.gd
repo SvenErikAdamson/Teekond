@@ -64,6 +64,7 @@ func key_control():
 	if key != "":
 		key_icon.show()
 	if current_island and key != "":
+		level_manager.key_list.append(key)
 		key = ""
 		key_icon.hide()
 		

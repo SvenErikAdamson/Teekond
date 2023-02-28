@@ -5,6 +5,7 @@ var current_island: Node
 var hovered_island:  Node
 var last_island:  Node
 
+
 @export var forage_modifier: float = 3.0
 @export var combat_modifier: float = 1.0
 @export var rest_modifier: float = 1.0
