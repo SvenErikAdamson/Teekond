@@ -95,10 +95,10 @@ _data = {
 script = ExtResource("1_ggtus")
 
 [node name="EnemyMarker" type="Marker2D" parent="."]
-position = Vector2(24.5, -4.5)
+position = Vector2(25.5, 0.5)
 
 [node name="PlayerMarker" type="Marker2D" parent="."]
-position = Vector2(-6.5, -4.5)
+position = Vector2(0.5, 0.5)
 
 [node name="Player" type="Sprite2D" parent="."]
 position = Vector2(-20, 0)

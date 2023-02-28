@@ -13,9 +13,9 @@ var creature_hp: int
 @onready var path_scene = preload("res://scenes/utility/path_between.tscn")
 
 var player_timer := 0.0
-var player_rate := 1
+var player_rate := 0.8
 var creature_timer := 0.0
-var creature_rate := 1
+var creature_rate := 0.8
 var is_combat_on = false
 var turn: bool = true
 

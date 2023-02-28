@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://c6byyvp5ypjmq"]
+[gd_scene load_steps=20 format=3 uid="uid://c6byyvp5ypjmq"]
 
 [ext_resource type="PackedScene" uid="uid://wg1gs70n7nbo" path="res://scenes/island/island.tscn" id="1_i6ghg"]
 [ext_resource type="Script" path="res://scenes/level_manager.gd" id="1_om1mu"]
 [ext_resource type="Script" path="res://scenes/weather/cloudspawner.gd" id="2_cshct"]
 [ext_resource type="Script" path="res://scenes/utility/camera_controller.gd" id="2_jfjvg"]
 [ext_resource type="PackedScene" uid="uid://bhpk12v6wyq8m" path="res://scenes/island/connection.tscn" id="2_rdx8w"]
+[ext_resource type="PackedScene" uid="uid://c1lgbysdyncgq" path="res://scenes/weather/winter.tscn" id="4_q32ig"]
 [ext_resource type="Script" path="res://scenes/ui/ui_manager.gd" id="4_ytuiy"]
 [ext_resource type="PackedScene" uid="uid://6c0bbj4riqy5" path="res://scenes/encounters/data/Shep.tscn" id="5_qs6up"]
 [ext_resource type="PackedScene" uid="uid://b1shpigd6sem7" path="res://scenes/encounters/data/cato.tscn" id="5_vhypp"]
@@ -40,6 +41,9 @@ one_shot = true
 position_smoothing_enabled = true
 script = ExtResource("2_jfjvg")
 
+[node name="Winter" parent="Level/Camera2D" instance=ExtResource("4_q32ig")]
+position = Vector2(0, -240)
+
 [node name="Islands" type="Node2D" parent="Level"]
 
 [node name="Island" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
@@ -68,6 +72,7 @@ creature_scene = ExtResource("5_qs6up")
 scouted = true
 food = 0.0
 pop = 3
+key = "Jesh"
 
 [node name="Island6" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(1104, -64)
