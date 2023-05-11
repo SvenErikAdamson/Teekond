@@ -27,6 +27,7 @@ func _process(delta):
 	exhaustion_check()
 	use_rations(delta)
 	rest(delta)
+	game_over_check()
 	forage_modifier = pop * 1.0
 	
 func add_connection(island, con):
@@ -71,3 +72,8 @@ func exhaustion_check():
 		exhaustion = 100
 	elif exhaustion < 0:
 		exhaustion = 0
+
+func game_over_check():
+	if pop <= 0:
+		$"../UI/GameOver".visible
+		$"../UI/GameOver".over = true

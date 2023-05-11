@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c6byyvp5ypjmq"]
+[gd_scene load_steps=22 format=3 uid="uid://c6byyvp5ypjmq"]
 
 [ext_resource type="PackedScene" uid="uid://wg1gs70n7nbo" path="res://scenes/island/island.tscn" id="1_i6ghg"]
 [ext_resource type="Script" path="res://scenes/level_manager.gd" id="1_om1mu"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bgsghea166yr6" path="res://assets/sprites/icons/food.png" id="10_ufr34"]
 [ext_resource type="Texture2D" uid="uid://do5uhcm6d6leq" path="res://assets/sprites/icons/water.png" id="11_6qias"]
 [ext_resource type="PackedScene" uid="uid://chdbxmmfcthwa" path="res://scenes/ui/menu/main_menu.tscn" id="11_7cetr"]
+[ext_resource type="PackedScene" uid="uid://c7837tu5a628n" path="res://scenes/ui/gamestate/gameover_panel.tscn" id="18_3lf3e"]
 [ext_resource type="AudioStream" uid="uid://b8oorvr1jtskl" path="res://assets/music/main.ogg" id="18_nrc7q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_da8rt"]
@@ -544,6 +545,8 @@ show_percentage = false
 
 [node name="MainMenu" parent="UI" instance=ExtResource("11_7cetr")]
 visible = false
+
+[node name="GameOver" parent="UI" instance=ExtResource("18_3lf3e")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_nrc7q")
