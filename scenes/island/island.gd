@@ -22,6 +22,10 @@ class_name Island
 @onready var hover_indicator = $HoverIndicator
 @onready var state_anim = $PlayerState/AnimSprite
 
+
+var original_size :=  scale
+var grow_size: = Vector2(1.1, 1.1)
+
 var creature_instance
 
 var in_progress: bool = false
@@ -186,3 +190,14 @@ func check_island_state(delta):
 		if is_instance_valid(creature_instance):
 			creature_instance.hide()
 		sprite.modulate = Color(0,0,0)
+
+
+func _on_mouse_entered():
+	grow_btn(grow_size, .1)
+
+func _on_mouse_exited():
+	grow_btn(original_size, .1)
+	
+func grow_btn(end_size: Vector2, duration: float):
+	var tween := create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(self, 'scale', end_size, duration)

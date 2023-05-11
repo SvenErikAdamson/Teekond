@@ -26,9 +26,9 @@ window/size/viewport_width=854
 window/size/viewport_height=480
 window/size/window_width_override=1920
 window/size/window_height_override=1080
-window/per_pixel_transparency/allowed=true
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/per_pixel_transparency/allowed=true
 
 [gui]
 
@@ -75,5 +75,5 @@ interact={
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0.376471, 0.454902, 0.670588, 1)
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.376471, 0.454902, 0.670588, 1)
