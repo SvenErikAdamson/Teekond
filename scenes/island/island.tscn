@@ -186,7 +186,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [node name="Island" type="StaticBody2D"]

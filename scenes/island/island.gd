@@ -35,6 +35,12 @@ var is_combat_init: bool = false
 var is_in_minigame: bool = false
 
 func _ready():
+	await get_tree().create_timer(randf_range(0.1,0.3))
+	var tween = create_tween().set_loops()
+	tween.tween_property(self, "position:y", 5.0 , 1).as_relative()
+	tween.tween_interval(0.1)
+	tween.tween_property(self, "position:y", -5.0 , 1).as_relative()
+	tween.tween_interval(0.1)
 	set_variables()
 	if creature_scene != null:
 		has_encounter = true

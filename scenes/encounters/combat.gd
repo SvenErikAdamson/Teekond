@@ -59,7 +59,7 @@ func combat(delta):
 		player_animation.speed_scale = 1.5
 		player_animation.play("Attack")
 	elif creature_timer >= creature_rate and !turn:
-		creature.animation_player.speed_scale = 0.8
+		creature.animation_player.speed_scale = 1.0
 		creature.animation_player.play("Attack")
 	if creature_hp <= 0:
 		creature.animation_player.play("Death")

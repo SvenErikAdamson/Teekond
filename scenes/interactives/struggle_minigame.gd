@@ -31,10 +31,12 @@ func _process(delta):
 	if Input.is_action_just_pressed("interact") and is_lapping:
 		difficulty -= 1.0
 		print(difficulty)
+		SoundPlayer.play_sound(SoundPlayer.MINIGAME_CORRECT)
 		animation_player.play("Right")
 		tries -= 1
 		
 	if Input.is_action_just_pressed("interact") and !is_lapping:
+		SoundPlayer.play_sound(SoundPlayer.MINIGAME_FALSE)
 		animation_player.play("Wrong")
 		health -= 20
 		health_lost +=20
