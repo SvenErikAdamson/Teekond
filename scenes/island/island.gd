@@ -32,7 +32,7 @@ var in_progress: bool = false
 var is_scouted: bool = false
 var has_encounter: bool = false
 var is_combat_init: bool = false
-var is_in_minigame: bool = false
+
 
 func _ready():
 	await get_tree().create_timer(randf_range(0.1,0.3))
@@ -143,7 +143,7 @@ func draw_food_icon(amount, posy = 50):
 		offset += 15
 		
 func forage(delta):
-		if food > 0 and !is_combat_init and !is_in_minigame:
+		if food > 0 and !is_combat_init:
 			state_anim.play("Gather")
 			food -= delta * level_manager.forage_modifier
 			level_manager.food += delta * level_manager.forage_modifier
@@ -151,12 +151,12 @@ func forage(delta):
 			state_anim.play("Idle")
 			
 func recruit():
-		if pop > 0 and !is_combat_init and !is_in_minigame:
+		if pop > 0 and !is_combat_init:
 			level_manager.pop += pop
 			pop = 0
 
 func _on_input_event(_viewport, event, _shape_idx):
-	if event.is_action_pressed("mb_left") and current_island and !in_progress and !is_combat_init and !is_in_minigame:
+	if event.is_action_pressed("mb_left") and current_island and !in_progress and !is_combat_init:
 		var connector = connector_scene.instantiate()
 		in_progress = true
 		add_child(connector)
@@ -171,13 +171,6 @@ func set_variables():
 		icon_state()
 		scouted = true
 		level_manager.current_island = self
-
-func create_minigame():
-	if minigame_scene != null and !is_in_minigame:
-		var minigame = minigame_scene.instantiate()
-		add_child(minigame)
-		minigame.position = $MiniGamePosition.position
-		is_in_minigame = true
 		
 func check_island_state(delta):
 	if current_island:
@@ -185,7 +178,6 @@ func check_island_state(delta):
 		forage(delta)
 		recruit()
 		icon_state()
-		create_minigame()
 		state_anim.show()
 	if scouted:
 		icon_state()
