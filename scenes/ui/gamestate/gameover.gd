@@ -2,7 +2,7 @@ extends Control
 var over: bool = false
 func _ready():
 	pass
-func _process(delta):
+func _process(_delta):
 	if over:
 		visible = !visible
 		get_tree().paused = visible

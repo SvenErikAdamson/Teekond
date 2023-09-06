@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dn2spwst2eqrn"]
-
-[ext_resource type="Script" path="res://scenes/weather/cloud.gd" id="1_5r6v1"]
-
-[node name="cloud" type="Node2D"]
-script = ExtResource("1_5r6v1")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]

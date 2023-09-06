@@ -1,7 +1,3 @@
-**Editor**: Godot rc4
+**Editor**: Godot 4.1
 
-Just going with the flow, it's about the journey.
-
-**Todo currently**
-
-- Everything[ ] 
+Teekond - Journey in Estonian, marvelous codename
