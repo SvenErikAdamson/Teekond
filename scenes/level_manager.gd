@@ -13,10 +13,7 @@ var last_island:  Node
 @export var food: float = 25
 @export var water: int = 20
 @export var pop: int = 5
-
 var exhaustion: float = 0.0
-var key_list: Array
-
 var player_in_combat: bool = false
 var player_is_moving: bool = false
 var player_in_winter: bool = false
@@ -24,7 +21,6 @@ var player_in_winter: bool = false
 @onready var scouting_indicator_scene = load("res://scenes/island/indicators/scouting_indicator.tscn")
 
 func _process(delta):
-	exhaustion_check()
 	use_rations(delta)
 	rest(delta)
 	game_over_check()
@@ -66,12 +62,6 @@ func use_rations(delta):
 func rest(delta):
 	if !player_in_combat and !player_is_moving and exhaustion > 0:
 		exhaustion -= delta * rest_modifier
-
-func exhaustion_check():
-	if exhaustion >= 100:
-		exhaustion = 100
-	elif exhaustion < 0:
-		exhaustion = 0
 
 func game_over_check():
 	if pop <= 0:

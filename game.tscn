@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c6byyvp5ypjmq"]
+[gd_scene load_steps=52 format=3 uid="uid://c6byyvp5ypjmq"]
 
 [ext_resource type="PackedScene" uid="uid://wg1gs70n7nbo" path="res://scenes/island/island.tscn" id="1_i6ghg"]
 [ext_resource type="Script" path="res://scenes/level_manager.gd" id="1_om1mu"]
@@ -596,12 +596,6 @@ _bundled = {
 "version": 3
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_da8rt"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h7bpt"]
-bg_color = Color(0.984314, 1, 0.52549, 1)
-
 [node name="Game" type="Node2D"]
 
 [node name="Level" type="Node2D" parent="."]
@@ -1093,20 +1087,6 @@ texture = ExtResource("8_5phof")
 layout_mode = 2
 theme_override_fonts/font = ExtResource("9_sgapp")
 text = "5"
-
-[node name="ExhaustionBar" type="ProgressBar" parent="UI/Control"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -294.0
-offset_top = 2.0
-offset_right = -166.0
-offset_bottom = 21.0
-grow_horizontal = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_da8rt")
-theme_override_styles/fill = SubResource("StyleBoxFlat_h7bpt")
-show_percentage = false
 
 [node name="MainMenu" parent="UI" instance=ExtResource("11_7cetr")]
 visible = false

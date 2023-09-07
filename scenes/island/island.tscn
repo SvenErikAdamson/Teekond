@@ -1,8 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://wg1gs70n7nbo"]
+[gd_scene load_steps=25 format=3 uid="uid://wg1gs70n7nbo"]
 
 [ext_resource type="Script" path="res://scenes/island/island.gd" id="1_ilmvi"]
 [ext_resource type="Texture2D" uid="uid://ce5t31q31kv8a" path="res://assets/sprites/islands/standard-Sheet.png" id="2_lcv0q"]
-[ext_resource type="Texture2D" uid="uid://c75n37r2x6hnd" path="res://assets/sprites/misc/pointer.png" id="4_eeuat"]
 [ext_resource type="Texture2D" uid="uid://8h84grbph7jf" path="res://assets/sprites/character/TribesMan_Forage-Sheet.png" id="4_kfod4"]
 [ext_resource type="Texture2D" uid="uid://dbgguw131an07" path="res://assets/sprites/misc/hovered_pointer.png" id="4_wo41w"]
 
@@ -226,19 +225,11 @@ texture = ExtResource("4_wo41w")
 
 [node name="Pop" type="Node2D" parent="Icons"]
 
-[node name="Key" type="Sprite2D" parent="Icons"]
-visible = false
-position = Vector2(0, -72)
-texture = ExtResource("4_eeuat")
-
 [node name="EnemyPosition" type="Marker2D" parent="."]
 position = Vector2(0, -7)
 
 [node name="CombatPosition" type="Marker2D" parent="."]
 position = Vector2(-9, -7)
-
-[node name="MiniGamePosition" type="Marker2D" parent="."]
-position = Vector2(0, -63)
 
 [node name="PlayerState" type="Node2D" parent="."]
 position = Vector2(0, -7)
