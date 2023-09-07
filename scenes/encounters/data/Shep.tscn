@@ -128,5 +128,3 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_7i8l2")
-
-[connection signal="input_event" from="." to="." method="_on_input_event"]
