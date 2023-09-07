@@ -8,16 +8,12 @@ class_name Island
 @export var food: float = 300.0
 @export var pop: int = 0
 @export var harshness: float = 2.0
-@export_category("Island Challenges")
-@export var key: String
-@export var minigame_scene: PackedScene = null
 
 @onready var combat_scene = preload("res://scenes/encounters/combat.tscn")
 @onready var connector_scene = preload("res://scenes/utility/connector.tscn")
 @onready var food_icon_scene = load("res://scenes/ui/ingame/food_icon.tscn")
 @onready var pop_icon_scene = load("res://scenes/ui/ingame/pop_icon.tscn")
 @onready var level_manager = get_node("/root/Game/Level")
-@onready var key_icon = $Icons/Key
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var hover_indicator = $HoverIndicator
 @onready var state_anim = $PlayerState/AnimSprite
@@ -65,18 +61,9 @@ func check_for_combat():
 		is_combat_init = true
 		
 func _process(delta):
-	key_control()
 	check_island_state(delta)
 	if !current_island or is_combat_init:
 		state_anim.hide()
-		
-func key_control():
-	if key != "":
-		key_icon.show()
-	if current_island and key != "":
-		level_manager.key_list.append(key)
-		key = ""
-		key_icon.hide()
 		
 func icon_state():
 	if food >= 90.0:

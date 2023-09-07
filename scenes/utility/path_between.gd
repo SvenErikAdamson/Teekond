@@ -7,6 +7,9 @@ var retreat: bool = false
 @onready var level_manager = get_node("/root/Game/Level")
 @onready var pathfollow = $PathFollow2D
 
+"""
+This is too long, could and should refactor it smoller.
+"""
 func _ready():
 	level_manager.player_is_moving = true
 	
