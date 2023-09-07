@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c6byyvp5ypjmq"]
+[gd_scene load_steps=66 format=3 uid="uid://c6byyvp5ypjmq"]
 
 [ext_resource type="PackedScene" uid="uid://wg1gs70n7nbo" path="res://scenes/island/island.tscn" id="1_i6ghg"]
 [ext_resource type="Script" path="res://scenes/level_manager.gd" id="1_om1mu"]
@@ -8,17 +8,16 @@
 [ext_resource type="Script" path="res://scenes/ui/ui_manager.gd" id="4_ytuiy"]
 [ext_resource type="Texture2D" uid="uid://cl57ucjahexh5" path="res://assets/sprites/interactive/minigames/catch/mover.png" id="5_ot4c3"]
 [ext_resource type="PackedScene" uid="uid://6c0bbj4riqy5" path="res://scenes/encounters/data/Shep.tscn" id="5_qs6up"]
-[ext_resource type="PackedScene" uid="uid://b1shpigd6sem7" path="res://scenes/encounters/data/cato.tscn" id="5_vhypp"]
-[ext_resource type="PackedScene" uid="uid://c3pstpkt3xphp" path="res://scenes/encounters/data/wolfr.tscn" id="6_gxt12"]
-[ext_resource type="PackedScene" uid="uid://ctk507kq7yc53" path="res://scenes/encounters/data/bigum.tscn" id="7_1orpv"]
+[ext_resource type="Texture2D" uid="uid://de76lp1bblv03" path="res://assets/sprites/creatures/Cato-Sheet.png" id="6_8eq8g"]
 [ext_resource type="Texture2D" uid="uid://dskrd11sqbt24" path="res://assets/sprites/icons/pop.png" id="8_5phof"]
+[ext_resource type="Texture2D" uid="uid://fcg3iydljryc" path="res://assets/sprites/creatures/wolfr-Sheet.png" id="8_x41ms"]
+[ext_resource type="Texture2D" uid="uid://boq0yvjqy1wmy" path="res://assets/sprites/creatures/bigum-Sheet.png" id="9_rqad4"]
 [ext_resource type="FontFile" uid="uid://1yl0tcwtd4ql" path="res://assets/m5x7.ttf" id="9_sgapp"]
+[ext_resource type="Texture2D" uid="uid://cmchc7kvkk8v2" path="res://assets/doll-mer-Sheet.png" id="10_60mup"]
 [ext_resource type="Texture2D" uid="uid://bgsghea166yr6" path="res://assets/sprites/icons/food.png" id="10_ufr34"]
 [ext_resource type="Texture2D" uid="uid://do5uhcm6d6leq" path="res://assets/sprites/icons/water.png" id="11_6qias"]
 [ext_resource type="PackedScene" uid="uid://chdbxmmfcthwa" path="res://scenes/ui/menu/main_menu.tscn" id="11_7cetr"]
-[ext_resource type="PackedScene" uid="uid://dig1kiob30hq0" path="res://scenes/encounters/data/dollmer.tscn" id="11_vcssg"]
 [ext_resource type="PackedScene" uid="uid://c7837tu5a628n" path="res://scenes/ui/gamestate/gameover_panel.tscn" id="18_3lf3e"]
-[ext_resource type="AudioStream" uid="uid://b8oorvr1jtskl" path="res://assets/music/main.ogg" id="18_nrc7q"]
 
 [sub_resource type="GDScript" id="GDScript_w2vcu"]
 script/source = "extends Node2D
@@ -224,6 +223,585 @@ _bundled = {
 "version": 3
 }
 
+[sub_resource type="GDScript" id="GDScript_w5lu5"]
+script/source = "extends StaticBody2D
+
+var health: float = 64
+var min_dmg: int  = 94
+var max_dmg: int = 231
+
+var parent: Node 
+var in_combat: bool = false
+
+@onready var animation_player = $AnimationPlayer
+
+signal on_click_damage()
+
+
+func _ready():
+	animation_player.play(\"Idle\")
+	
+func animation_end():
+	get_parent().creature_attack()
+
+func _on_input_event(_viewport, event, _shape_idx):
+	if event.is_action_pressed(\"mb_left\") and in_combat:
+		print(\"damage\")
+		on_click_damage.emit()
+
+
+"
+
+[sub_resource type="Animation" id="Animation_ol1r5"]
+resource_name = "Attack"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"animation_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_we6v1"]
+resource_name = "Damage"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_kfejg"]
+resource_name = "Death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [27, 28, 29, 30, 31]
+}
+
+[sub_resource type="Animation" id="Animation_k5lyy"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_pvyh5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r65aa"]
+_data = {
+"Attack": SubResource("Animation_ol1r5"),
+"Damage": SubResource("Animation_we6v1"),
+"Death": SubResource("Animation_kfejg"),
+"Idle": SubResource("Animation_k5lyy"),
+"RESET": SubResource("Animation_pvyh5")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7i8l2"]
+size = Vector2(32, 44)
+
+[sub_resource type="PackedScene" id="PackedScene_nuj21"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1073741828, 1073741827, 17, 16, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("Cato", "StaticBody2D", "input_pickable", "script", "Sprite2D", "Sprite2D", "texture", "hframes", "vframes", "AnimationPlayer", "AnimationPlayer", "libraries", "CollisionShape2D", "CollisionShape2D", "position", "shape", "_on_input_event", "input_event"),
+"node_count": 4,
+"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 1073741824, 0, 5, 4, -1, 3, 6, 2, 7, 3, 8, 4, 0, 1073741825, 0, 10, 9, -1, 1, 11, 5, 0, 1073741826, 0, 13, 12, -1, 2, 14, 6, 15, 7, 0),
+"variants": [true, SubResource("GDScript_w5lu5"), ExtResource("6_8eq8g"), 9, 4, {
+"": SubResource("AnimationLibrary_r65aa")
+}, Vector2(0, 2), SubResource("RectangleShape2D_7i8l2")],
+"version": 3
+}
+
+[sub_resource type="GDScript" id="GDScript_sujud"]
+script/source = "extends StaticBody2D
+
+var health: float = 27
+var min_dmg: int  = 3
+var max_dmg: int = 15
+
+var parent: Node 
+var in_combat: bool = false
+
+@onready var animation_player = $AnimationPlayer
+
+signal on_click_damage()
+
+
+func _ready():
+	animation_player.play(\"Idle\")
+	
+func animation_end():
+	get_parent().creature_attack()
+
+
+
+"
+
+[sub_resource type="Animation" id="Animation_nxl01"]
+resource_name = "Attack"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"animation_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_cpb4f"]
+resource_name = "Damage"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_4mshi"]
+resource_name = "Death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [27, 28, 29, 30, 31]
+}
+
+[sub_resource type="Animation" id="Animation_qmvo2"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_xuwky"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rnosn"]
+_data = {
+"Attack": SubResource("Animation_nxl01"),
+"Damage": SubResource("Animation_cpb4f"),
+"Death": SubResource("Animation_4mshi"),
+"Idle": SubResource("Animation_qmvo2"),
+"RESET": SubResource("Animation_xuwky")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1n33x"]
+size = Vector2(32, 44)
+
+[sub_resource type="PackedScene" id="PackedScene_rnmev"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1073741828, 1073741827, 18, 17, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("Wolfr", "StaticBody2D", "input_pickable", "script", "Sprite2D", "Sprite2D", "texture", "hframes", "vframes", "AnimationPlayer", "AnimationPlayer", "speed_scale", "libraries", "CollisionShape2D", "CollisionShape2D", "position", "shape", "_on_input_event", "input_event"),
+"node_count": 4,
+"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 1073741824, 0, 5, 4, -1, 3, 6, 2, 7, 3, 8, 4, 0, 1073741825, 0, 10, 9, -1, 2, 11, 5, 12, 6, 0, 1073741826, 0, 14, 13, -1, 2, 15, 7, 16, 8, 0),
+"variants": [true, SubResource("GDScript_sujud"), ExtResource("8_x41ms"), 9, 4, 0.5, {
+"": SubResource("AnimationLibrary_rnosn")
+}, Vector2(0, 2), SubResource("RectangleShape2D_1n33x")],
+"version": 3
+}
+
+[sub_resource type="GDScript" id="GDScript_hw3pg"]
+script/source = "extends StaticBody2D
+
+var health: float = 25
+var min_dmg: int  = 8
+var max_dmg: int = 27
+var parent: Node 
+var in_combat: bool = false
+
+@onready var animation_player = $AnimationPlayer
+
+signal on_click_damage()
+
+
+func _ready():
+	animation_player.play(\"Idle\")
+	
+func animation_end():
+	get_parent().creature_attack()
+
+func _on_input_event(_viewport, event, _shape_idx):
+	if event.is_action_pressed(\"mb_left\") and in_combat:
+		print(\"damage\")
+		on_click_damage.emit()
+
+
+"
+
+[sub_resource type="Animation" id="Animation_hrg2m"]
+resource_name = "Attack"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"animation_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xknke"]
+resource_name = "Damage"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_fd83l"]
+resource_name = "Death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [27, 28, 29, 30, 31]
+}
+
+[sub_resource type="Animation" id="Animation_h32bj"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_12ibp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2xfpw"]
+_data = {
+"Attack": SubResource("Animation_hrg2m"),
+"Damage": SubResource("Animation_xknke"),
+"Death": SubResource("Animation_fd83l"),
+"Idle": SubResource("Animation_h32bj"),
+"RESET": SubResource("Animation_12ibp")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8r5ba"]
+size = Vector2(32, 44)
+
+[sub_resource type="PackedScene" id="PackedScene_i2gr0"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1073741828, 1073741827, 18, 17, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("Bigum", "StaticBody2D", "input_pickable", "script", "Sprite2D", "Sprite2D", "texture", "hframes", "vframes", "AnimationPlayer", "AnimationPlayer", "speed_scale", "libraries", "CollisionShape2D", "CollisionShape2D", "position", "shape", "_on_input_event", "input_event"),
+"node_count": 4,
+"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 1073741824, 0, 5, 4, -1, 3, 6, 2, 7, 3, 8, 4, 0, 1073741825, 0, 10, 9, -1, 2, 11, 5, 12, 6, 0, 1073741826, 0, 14, 13, -1, 2, 15, 7, 16, 8, 0),
+"variants": [true, SubResource("GDScript_hw3pg"), ExtResource("9_rqad4"), 9, 4, 0.5, {
+"": SubResource("AnimationLibrary_2xfpw")
+}, Vector2(0, 2), SubResource("RectangleShape2D_8r5ba")],
+"version": 3
+}
+
+[sub_resource type="GDScript" id="GDScript_m2svg"]
+script/source = "extends StaticBody2D
+
+var health: float = 5
+var min_dmg: int  = 0
+var max_dmg: int = 5
+
+var parent: Node 
+var in_combat: bool = false
+
+@onready var animation_player = $AnimationPlayer
+
+signal on_click_damage()
+
+func _ready():
+	animation_player.play(\"Idle\")
+	
+func animation_end():
+	get_parent().creature_attack()
+
+func _on_input_event(_viewport, event, _shape_idx):
+	if event.is_action_pressed(\"mb_left\") and in_combat:
+		print(\"damage\")
+		on_click_damage.emit()
+"
+
+[sub_resource type="Animation" id="Animation_erwr4"]
+resource_name = "Attack"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13, 14, 15]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"animation_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_cf4vb"]
+resource_name = "Damage"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [16, 17, 18]
+}
+
+[sub_resource type="Animation" id="Animation_jyg46"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_hr4mx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cqdcn"]
+_data = {
+"Attack": SubResource("Animation_erwr4"),
+"Damage": SubResource("Animation_cf4vb"),
+"Idle": SubResource("Animation_jyg46"),
+"RESET": SubResource("Animation_hr4mx")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6gsm"]
+size = Vector2(32, 44)
+
+[sub_resource type="PackedScene" id="PackedScene_8jvaa"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1073741828, 1073741827, 19, 18, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("Dollmer", "StaticBody2D", "input_pickable", "script", "Sprite2D", "Sprite2D", "texture", "flip_h", "hframes", "vframes", "AnimationPlayer", "AnimationPlayer", "speed_scale", "libraries", "CollisionShape2D", "CollisionShape2D", "position", "shape", "_on_input_event", "input_event"),
+"node_count": 4,
+"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 1073741824, 0, 5, 4, -1, 4, 6, 2, 7, 3, 8, 4, 9, 5, 0, 1073741825, 0, 11, 10, -1, 2, 12, 6, 13, 7, 0, 1073741826, 0, 15, 14, -1, 2, 16, 8, 17, 9, 0),
+"variants": [true, SubResource("GDScript_m2svg"), ExtResource("10_60mup"), true, 8, 3, 0.5, {
+"": SubResource("AnimationLibrary_cqdcn")
+}, Vector2(0, 2), SubResource("RectangleShape2D_i6gsm")],
+"version": 3
+}
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_da8rt"]
 bg_color = Color(0, 0, 0, 1)
 
@@ -259,7 +837,7 @@ minigame_scene = SubResource("PackedScene_t6ybk")
 
 [node name="Island4" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(1120, 392)
-creature_scene = ExtResource("5_vhypp")
+creature_scene = SubResource("PackedScene_nuj21")
 
 [node name="Island5" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(582, -245)
@@ -289,7 +867,7 @@ food = 0.0
 
 [node name="Island10" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(1739, -100)
-creature_scene = ExtResource("6_gxt12")
+creature_scene = SubResource("PackedScene_rnmev")
 food = 120.0
 pop = 3
 
@@ -320,12 +898,12 @@ food = 0.0
 
 [node name="Island17" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(3401, -302)
-creature_scene = ExtResource("7_1orpv")
+creature_scene = SubResource("PackedScene_i2gr0")
 food = 0.0
 
 [node name="Island18" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(3509, 4)
-creature_scene = ExtResource("7_1orpv")
+creature_scene = SubResource("PackedScene_i2gr0")
 food = 0.0
 
 [node name="Island19" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
@@ -370,12 +948,12 @@ food = 0.0
 
 [node name="Island29" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(2455, 704)
-creature_scene = ExtResource("7_1orpv")
+creature_scene = SubResource("PackedScene_i2gr0")
 food = 0.0
 
 [node name="Island30" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
 position = Vector2(2625, 888)
-creature_scene = ExtResource("11_vcssg")
+creature_scene = SubResource("PackedScene_8jvaa")
 food = 0.0
 
 [node name="Island51" parent="Level/Islands" instance=ExtResource("1_i6ghg")]
@@ -743,8 +1321,3 @@ show_percentage = false
 visible = false
 
 [node name="GameOver" parent="UI" instance=ExtResource("18_3lf3e")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("18_nrc7q")
-volume_db = -10.0
-autoplay = true

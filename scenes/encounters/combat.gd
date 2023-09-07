@@ -35,20 +35,13 @@ func _process(delta: float):
 	check_death()
 	combat(delta)
 
-
 func create_creature():
 	creature = creature_scene.instantiate()
-	creature.on_click_damage.connect(self.on_click_damage)
 	creature.position = $EnemyMarker.position
 	creature.in_combat = true
 	add_child(creature)
 	if creature != null:
 		creature_hp = creature.health
-
-func on_click_damage():
-	if level_manager.exhaustion <= 95:
-		player_damage(1)
-		level_manager.exhaustion += 5
 
 func combat(delta):
 	if turn:
