@@ -17,7 +17,6 @@ config/icon="res://assets/icon.svg"
 
 [autoload]
 
-World="*res://scenes/globals/world.gd"
 SoundPlayer="*res://scenes/globals/sound_player.tscn"
 
 [display]
