@@ -8,7 +8,6 @@ class_name Island
 @export var food: float = 300.0
 @export var pop: int = 0
 
-
 @onready var combat_scene = preload("res://scenes/encounters/combat.tscn")
 @onready var connector_scene = preload("res://scenes/utility/connector.tscn")
 @onready var food_icon_scene = load("res://scenes/ui/ingame/food_icon.tscn")
@@ -17,7 +16,6 @@ class_name Island
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var hover_indicator = $HoverIndicator
 @onready var player_state_animation = $PlayerState/AnimSprite
-
 
 var original_size :=  scale
 var grow_size: = Vector2(1.1, 1.1)
@@ -53,7 +51,7 @@ func create_creature_prop():
 	add_child(creature_instance)
 
 func check_for_combat():
-	if !is_combat_init and has_encounter and current_island:
+	if !is_combat_init && has_encounter && current_island:
 		var combat = combat_scene.instantiate()
 		combat.creature_scene = creature_scene
 		add_child(combat)
@@ -62,7 +60,7 @@ func check_for_combat():
 		
 func _process(delta):
 	check_island_state(delta)
-	if !current_island or is_combat_init:
+	if !current_island || is_combat_init:
 		player_state_animation.hide()
 		
 func icon_state():
@@ -130,7 +128,7 @@ func draw_food_icon(amount, posy = 50):
 		offset += 15
 		
 func forage(delta):
-		if food > 0 and !is_combat_init:
+		if food > 0 && !is_combat_init:
 			player_state_animation.play("Gather")
 			food -= delta * level_manager.forage_modifier
 			level_manager.food += delta * level_manager.forage_modifier
@@ -138,7 +136,7 @@ func forage(delta):
 			player_state_animation.play("Idle")
 			
 func recruit():
-		if pop > 0 and !is_combat_init:
+		if pop > 0 && !is_combat_init:
 			level_manager.pop += pop
 			pop = 0
 
@@ -175,7 +173,6 @@ func check_island_state(delta):
 		if is_instance_valid(creature_instance):
 			creature_instance.hide()
 		sprite.modulate = Color(0,0,0)
-
 
 func _on_mouse_entered():
 	grow_btn(grow_size, .1)
