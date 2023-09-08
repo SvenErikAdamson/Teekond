@@ -66,7 +66,6 @@ func combat(delta):
 
 func player_attack():
 	SoundPlayer.play_sound(SoundPlayer.MELEE_HIT)
-	level_manager.exhaustion += 0.5
 	player_damage(randf_range(1,level_manager.pop))
 	is_player_turn = false
 	creature_timer = 0.0

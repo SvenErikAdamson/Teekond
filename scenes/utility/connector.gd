@@ -13,7 +13,7 @@ func _ready():
 	
 func _process(_delta):
 	set_positions()
-	if Input.is_action_just_released("mb_left") and focused_island != null and level_manager.exhaustion <= 90:
+	if Input.is_action_just_released("mb_left") and focused_island != null:
 		var distance = from.position.distance_to(focused_island.position)
 		print("Can travel to node: " + str(level_manager.check_destination(from,focused_island)))
 		if level_manager.check_destination(from,focused_island):

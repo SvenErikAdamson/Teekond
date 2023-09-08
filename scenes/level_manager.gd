@@ -5,7 +5,6 @@ var current_island: Node
 var hovered_island:  Node
 var last_island:  Node
 
-
 @export var forage_modifier: float = 3.0
 @export var combat_modifier: float = 1.0
 @export var rest_modifier: float = 1.0
@@ -13,7 +12,7 @@ var last_island:  Node
 @export var food: float = 25
 @export var water: int = 20
 @export var pop: int = 5
-var exhaustion: float = 0.0
+
 var player_in_combat: bool = false
 var player_is_moving: bool = false
 var player_in_winter: bool = false
@@ -22,7 +21,6 @@ var player_in_winter: bool = false
 
 func _process(delta):
 	use_rations(delta)
-	rest(delta)
 	#This will need to hop off to be only checked when on new island
 	forage_modifier = pop * 1.0
 	
@@ -40,6 +38,7 @@ func check_destination(from, to):
 	else:
 		return false
 
+#Messy, needs work
 func scout(island):
 	if !island.is_scouted and !island.scouted and food > 8:
 		food -= 5
@@ -58,9 +57,4 @@ func use_rations(delta):
 		food -= delta * winter_modifier * (float(pop) / 2)
 	else:
 		food -= delta
-
-func rest(delta):
-	if !player_in_combat and !player_is_moving and exhaustion > 0:
-		exhaustion -= delta * rest_modifier
-
 
