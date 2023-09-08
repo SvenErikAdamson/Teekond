@@ -23,7 +23,7 @@ var player_in_winter: bool = false
 func _process(delta):
 	use_rations(delta)
 	rest(delta)
-	game_over_check()
+	#This will need to hop off to be only checked when on new island
 	forage_modifier = pop * 1.0
 	
 func add_connection(island, con):
@@ -63,7 +63,4 @@ func rest(delta):
 	if !player_in_combat and !player_is_moving and exhaustion > 0:
 		exhaustion -= delta * rest_modifier
 
-func game_over_check():
-	if pop <= 0:
-		$"../UI/GameOver".visible
-		$"../UI/GameOver".over = true
+
