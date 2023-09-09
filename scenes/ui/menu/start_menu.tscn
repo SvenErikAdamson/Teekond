@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bpnpy4tc088lf"]
+[gd_scene load_steps=15 format=3 uid="uid://bpnpy4tc088lf"]
 
 [ext_resource type="Script" path="res://scenes/ui/menu/start_menu.gd" id="1_u6v20"]
 [ext_resource type="Texture2D" uid="uid://do3tdarip7cm4" path="res://assets/sprites/ui/buttons/play/Play1.png" id="2_xiy1x"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://eicyn55hyqp4" path="res://assets/sprites/ui/buttons/quit/Quit1.png" id="11_huyn4"]
 [ext_resource type="Texture2D" uid="uid://bjxcldnwqw7ix" path="res://assets/sprites/ui/buttons/quit/Quit2.png" id="12_k8it5"]
 [ext_resource type="Texture2D" uid="uid://wv7m4allyb12" path="res://assets/sprites/ui/buttons/quit/Quit3.png" id="13_8hf0i"]
+[ext_resource type="PackedScene" uid="uid://vrx5ciwy8655" path="res://scenes/ui/menu/tribe_pick.tscn" id="14_jb5aa"]
 
 [node name="StartMenu" type="Control"]
 process_mode = 3
@@ -250,6 +251,10 @@ offset_right = 26.5
 grow_horizontal = 2
 grow_vertical = 0
 text = "Back"
+
+[node name="TribeMenu" parent="." instance=ExtResource("14_jb5aa")]
+visible = false
+layout_mode = 1
 
 [connection signal="pressed" from="Menu/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Menu/Editor" to="." method="_on_editor_pressed"]

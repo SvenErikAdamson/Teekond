@@ -53,4 +53,54 @@ texture_normal = ExtResource("2_l8cbl")
 texture_pressed = ExtResource("3_y8ewl")
 texture_hover = ExtResource("4_eequ4")
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Menu/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/VBoxContainer2/Panel"]
+layout_mode = 2
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 125.0
+offset_bottom = 59.0
+text = "Ilust text ja mida muud saabki iilusamat siin olla, kõike ilusat, mis olemas on.
+See hõim on võitmatu ja lahe
+"
+tab_size = 5
+
+[node name="Start" type="TextureButton" parent="Menu/VBoxContainer2"]
+layout_mode = 2
+texture_normal = ExtResource("2_l8cbl")
+texture_pressed = ExtResource("3_y8ewl")
+texture_hover = ExtResource("4_eequ4")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Menu/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/VBoxContainer3/Panel"]
+layout_mode = 2
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 125.0
+offset_bottom = 59.0
+text = "Ilust text ja mida muud saabki iilusamat siin olla, kõike ilusat, mis olemas on.
+See hõim on võitmatu ja lahe
+"
+tab_size = 5
+
+[node name="Start" type="TextureButton" parent="Menu/VBoxContainer3"]
+layout_mode = 2
+texture_normal = ExtResource("2_l8cbl")
+texture_pressed = ExtResource("3_y8ewl")
+texture_hover = ExtResource("4_eequ4")
+
 [connection signal="pressed" from="Menu/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer2/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer3/Start" to="." method="_on_start_pressed"]
