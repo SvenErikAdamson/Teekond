@@ -30,7 +30,7 @@ func _on_audio_pressed():
 func _on_back_from_options_pressed():
 	show_and_hide(menu,options)
 
-##Find how that works
+##Find how that works - Know it, but don't need it atm
 #func _on_full_screen_toggled(button_pressed):
 #	DisplayServer.WINDOW_MODE_FULLSCREEN
 #

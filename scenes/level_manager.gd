@@ -57,4 +57,3 @@ func use_rations(delta):
 		food -= delta * winter_modifier * (float(pop) / 2)
 	else:
 		food -= delta
-
