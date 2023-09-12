@@ -4,11 +4,11 @@ func _ready():
 	pass
 func _process(_delta):
 	if over:
-		visible = !visible
 		get_tree().paused = visible
 
 func _on_replay_pressed():
-	get_tree().change_scene_to_file("res://game.tscn")
+	get_tree().reload_current_scene()
+	get_tree().paused = !visible
 
 
 func _on_quit_pressed():
