@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ch3lnt1ymdxgd"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelBox" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="LevelBox"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelBox"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="LevelBox/MarginContainer"]
+layout_mode = 2
