@@ -12,7 +12,7 @@ config_version=5
 
 config/name="WAY"
 run/main_scene="res://scenes/ui/menu/start_menu.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://assets/icon.svg"
 
 [autoload]
@@ -28,6 +28,12 @@ window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/per_pixel_transparency/allowed=true
+
+[file_customization]
+
+folder_colors={
+"res://scenes/": "yellow"
+}
 
 [gui]
 
